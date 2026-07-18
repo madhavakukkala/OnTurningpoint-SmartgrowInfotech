@@ -1,8 +1,33 @@
 /** Home page copy — BRIEF.md §4.2. */
 
+/**
+ * One rendered line of the hero headline. Declared explicitly so the optional
+ * `accent` flag survives `as const`, which would otherwise build a union where
+ * the property exists on only some members.
+ */
+export type HeadlineLine = { text: string; accent?: boolean };
+
+const heroHeadlineLines: HeadlineLine[] = [
+  { text: 'Study MBBS' },
+  { text: 'abroad', accent: true },
+  { text: 'at recognised universities,' },
+  { text: 'on fees you can plan for,' },
+  { text: 'with one team beside you' },
+  { text: 'from first call to graduation.' },
+];
+
 export const home = {
   hero: {
-    /** Display heading is split so the second word can take the italic serif accent. */
+    /**
+     * Six-line display headline. Each entry is one rendered line and masks up
+     * independently, so the break points are authored rather than left to the
+     * browser. Keep lines short — anything past ~34 characters wraps on
+     * laptop widths and breaks the stagger.
+     *
+     * `accent` renders that line in the italic serif.
+     */
+    headlineLines: heroHeadlineLines,
+    /** Kept for the OG image and any single-line usage. */
     headline: 'Study MBBS',
     headlineAccent: 'abroad',
     subhead:

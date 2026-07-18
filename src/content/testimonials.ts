@@ -49,11 +49,15 @@ export const testimonialsPlaceholder: Testimonial[] = [
 ];
 
 /**
- * Flip to `true` only once `testimonialsPlaceholder` holds real, permissioned
- * quotes. While false, the homepage skips the section entirely rather than
- * rendering placeholder text to the public.
+ * Currently `true` so the section is visible while the design is being
+ * reviewed locally.
+ *
+ * ⚠️ BEFORE THE SITE GOES PUBLIC: either replace the entries above with real,
+ * permissioned quotes, or set this back to `false`. Shipping the bracketed
+ * placeholders would look broken; shipping invented quotes in their place
+ * would be worse.
  */
-export const TESTIMONIALS_READY = false;
+export const TESTIMONIALS_READY = true;
 
 export const testimonialsIntro = {
   eyebrow: 'Student stories',

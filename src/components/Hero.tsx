@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
@@ -9,26 +10,26 @@ import { MagneticCursor } from '@/components/MagneticCursor';
 import { home } from '@/content/home';
 import { company } from '@/content/company';
 import { EASE } from '@/lib/motion';
+import { cn } from '@/lib/cn';
 
 /**
- * Home hero — typographic, no imagery.
+ * Home hero — full-bleed photograph with the headline set over it, matching the
+ * statement section further down the page.
  *
- * With the photograph removed there is nothing to balance an asymmetric layout
- * against, so the composition is centred: a single column on the optical
- * centre line, with whitespace doing the work the image used to do. Measure is
- * capped well below the container so the headline breaks where it is meant to
- * rather than running the full 1400px.
+ * The six-line headline is authored line by line (see home.hero.headlineLines)
+ * rather than left to wrap, so every break lands where it was intended and each
+ * line can mask up on its own beat. Line length is the constraint: past roughly
+ * 34 characters a line re-wraps on laptop widths and the stagger falls apart.
  *
- * Motion is one continuous sequence — eyebrow, then headline lines masking up,
- * then subhead and actions — so it reads as choreography rather than as several
- * unrelated animations firing at once.
+ * Legibility uses the same directional scrim as ImageStatement — heaviest on
+ * the left under the copy, clearing to the right so the photograph survives.
  */
 
 const line = {
   hidden: { y: '110%' },
   show: (i: number) => ({
     y: 0,
-    transition: { delay: 0.12 + i * 0.085, duration: 0.8, ease: EASE },
+    transition: { delay: 0.1 + i * 0.075, duration: 0.8, ease: EASE },
   }),
 };
 
@@ -37,7 +38,7 @@ const fade = {
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: 0.34 + i * 0.09, duration: 0.55, ease: EASE },
+    transition: { delay: 0.55 + i * 0.09, duration: 0.55, ease: EASE },
   }),
 };
 
@@ -49,127 +50,115 @@ export function Hero() {
   const init = reduce ? undefined : 'hidden';
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative isolate overflow-hidden pb-20 pt-14 md:pb-28 md:pt-20"
-    >
+    <section ref={sectionRef} className="relative isolate overflow-hidden">
       <MagneticCursor containerRef={sectionRef} />
 
-      <Container>
-        <div className="mx-auto max-w-4xl text-center">
-          {/* Eyebrow */}
-          <motion.p
-            custom={0}
-            variants={fade}
-            initial={init}
-            animate={anim}
-            className="flex items-center justify-center gap-3 text-eyebrow font-semibold uppercase text-ink-muted"
-          >
-            <span aria-hidden="true" className="h-px w-6 bg-primary/30" />
-            Overseas education consultancy · Nellore
-            <span aria-hidden="true" className="h-px w-6 bg-primary/30" />
-          </motion.p>
+      <div className="relative min-h-[42rem] md:min-h-[46rem] lg:min-h-[48rem]">
+        <Image
+          src={home.hero.image}
+          alt={home.hero.imageAlt}
+          fill
+          sizes="100vw"
+          className="-z-20 object-cover"
+          priority
+        />
 
-          {/* Headline — each line masks upward from its own clipping box */}
-          <h1 className="mt-8 text-display font-bold text-ink">
-            <span className="block overflow-hidden py-[0.06em]">
-              <motion.span
-                custom={0}
-                variants={line}
-                initial={init}
-                animate={anim}
-                className="block"
+        {/* Directional scrim — heavy under the copy, clearing right */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-gradient-to-r from-[rgba(18,10,9,0.9)] via-[rgba(18,10,9,0.62)] to-[rgba(18,10,9,0.2)]"
+        />
+        {/* Vertical softener for the stacked mobile layout */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-gradient-to-t from-[rgba(18,10,9,0.55)] to-transparent md:hidden"
+        />
+
+        <Container className="relative flex min-h-[42rem] items-center py-24 md:min-h-[46rem] lg:min-h-[48rem]">
+          <div className="max-w-3xl">
+            {/* Eyebrow */}
+            <motion.p
+              custom={0}
+              variants={fade}
+              initial={init}
+              animate={anim}
+              className="flex items-center gap-3 text-eyebrow font-semibold uppercase text-white/60"
+            >
+              <span aria-hidden="true" className="h-px w-7 bg-white/40" />
+              Overseas education consultancy · Nellore
+            </motion.p>
+
+            {/* Six-line headline — one clipping box per line */}
+            <h1 className="mt-8 text-display font-bold text-white">
+              {home.hero.headlineLines.map((l, i) => (
+                <span key={l.text} className="block overflow-hidden py-[0.055em]">
+                  <motion.span
+                    custom={i}
+                    variants={line}
+                    initial={init}
+                    animate={anim}
+                    className={cn('block', l.accent && 'accent text-white/85')}
+                  >
+                    {l.text}
+                  </motion.span>
+                </span>
+              ))}
+            </h1>
+
+            {/* Subhead */}
+            <motion.p
+              custom={1}
+              variants={fade}
+              initial={init}
+              animate={anim}
+              className="mt-8 max-w-[52ch] text-body text-white/75"
+            >
+              {home.hero.subhead}
+            </motion.p>
+
+            {/* Actions */}
+            <motion.div
+              custom={2}
+              variants={fade}
+              initial={init}
+              animate={anim}
+              className="mt-9 flex flex-wrap items-center gap-3"
+            >
+              <Button href="/contact" variant="onDark" className="group">
+                {company.primaryCta}
+                <ArrowRight
+                  aria-hidden="true"
+                  size={17}
+                  strokeWidth={2}
+                  className="transition-transform duration-300 ease-brand group-hover:translate-x-1"
+                />
+              </Button>
+              <Button
+                href="/mbbs-abroad"
+                className="border border-white/25 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
               >
-                {home.hero.headline}
-              </motion.span>
-            </span>
-            <span className="block overflow-hidden py-[0.06em]">
-              <motion.span
-                custom={1}
-                variants={line}
-                initial={init}
-                animate={anim}
-                className="block"
-              >
-                <span className="accent">{home.hero.headlineAccent}</span>
-              </motion.span>
-            </span>
-          </h1>
+                Explore MBBS abroad
+              </Button>
+            </motion.div>
 
-          {/* Subhead */}
-          <motion.p
-            custom={1}
-            variants={fade}
-            initial={init}
-            animate={anim}
-            className="mx-auto mt-7 max-w-[54ch] text-body text-ink"
-          >
-            {home.hero.subhead}
-          </motion.p>
-
-          {/* Secondary paragraph — carries the substance the photograph used to */}
-          <motion.p
-            custom={2}
-            variants={fade}
-            initial={init}
-            animate={anim}
-            className="mx-auto mt-5 max-w-[58ch] text-[0.9375rem] leading-relaxed text-ink-muted"
-          >
-            {home.hero.body}
-          </motion.p>
-
-          {/* Actions */}
-          <motion.div
-            custom={3}
-            variants={fade}
-            initial={init}
-            animate={anim}
-            className="mt-10 flex flex-wrap items-center justify-center gap-3"
-          >
-            <Button href="/contact" className="group">
-              {company.primaryCta}
-              <ArrowRight
-                aria-hidden="true"
-                size={17}
-                strokeWidth={2}
-                className="transition-transform duration-300 ease-brand group-hover:translate-x-1"
-              />
-            </Button>
-            <Button href="/mbbs-abroad" variant="ghost">
-              Explore MBBS abroad
-            </Button>
-          </motion.div>
-
-          {/* Inline trust row */}
-          <motion.ul
-            custom={4}
-            variants={fade}
-            initial={init}
-            animate={anim}
-            className="mt-12 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 border-t border-line pt-8"
-          >
-            {home.hero.highlights.map((item, i) => (
-              <li key={item} className="flex items-center gap-3">
-                {i > 0 && (
-                  <span aria-hidden="true" className="h-1 w-1 rounded-full bg-primary/25" />
-                )}
-                <span className="text-[0.8125rem] font-medium text-ink-muted">{item}</span>
-              </li>
-            ))}
-          </motion.ul>
-
-          {/* Qualifier */}
-          <motion.p
-            custom={5}
-            variants={fade}
-            initial={init}
-            animate={anim}
-            className="mx-auto mt-5 max-w-[52ch] text-[0.8125rem] leading-relaxed text-ink-subtle"
-          >
-            {home.hero.footnote}
-          </motion.p>
-        </div>
-      </Container>
+            {/* Inline trust row */}
+            <motion.ul
+              custom={3}
+              variants={fade}
+              initial={init}
+              animate={anim}
+              className="mt-12 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-white/15 pt-7"
+            >
+              {home.hero.highlights.map((item, i) => (
+                <li key={item} className="flex items-center gap-3">
+                  {i > 0 && <span aria-hidden="true" className="h-1 w-1 rounded-full bg-white/30" />}
+                  <span className="text-[0.8125rem] font-medium text-white/70">{item}</span>
+                </li>
+              ))}
+            </motion.ul>
+          </div>
+        </Container>
+      </div>
     </section>
   );
 }

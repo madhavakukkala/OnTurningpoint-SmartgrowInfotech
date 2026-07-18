@@ -12,7 +12,7 @@ import { TESTIMONIALS_READY, testimonialsPlaceholder } from '@/content/testimoni
 import { company } from '@/content/company';
 // Marquee is now rendered inside TrustBand rather than directly.
 import { FeatureGrid } from '@/components/FeatureGrid';
-import { CountryGrid } from '@/components/CountryCard';
+import { CountryCarousel } from '@/components/CountryCarousel';
 import { Stats } from '@/components/Stats';
 import { CTABand } from '@/components/CTABand';
 import { home } from '@/content/home';
@@ -94,13 +94,15 @@ export default function HomePage() {
             </Reveal>
           </div>
 
-          <div className="mt-16">
-            <CountryGrid items={countries.slice(0, 6)} />
-          </div>
-
+          {/* All 11 destinations on an auto-advancing rail that stays
+              manually scrollable — no need to truncate to six. */}
           <Reveal className="mt-14">
+            <CountryCarousel items={countries} />
+          </Reveal>
+
+          <Reveal className="mt-10">
             <Button href="/countries" variant="ghost">
-              View all 11 destinations
+              View all destinations
             </Button>
           </Reveal>
         </Container>
@@ -152,8 +154,10 @@ export default function HomePage() {
       {/* Full-bleed statement                                              */}
       {/* ---------------------------------------------------------------- */}
       <ImageStatement
-        image="/images/hero.jpg"
-        imageAlt="Graduates celebrating at the end of their degree"
+        /* Not hero.jpg — the hero now uses it, and repeating the same
+           photograph twice on one page reads as an asset shortage. */
+        image="/images/value-added.jpg"
+        imageAlt="A packed suitcase ready for departure"
         eyebrow="Admissions open · 2025–2026"
         headline="Your turning point"
         headlineAccent="starts here"
