@@ -61,9 +61,9 @@ const config: Config = {
          */
         display: ['clamp(2.5rem, 5vw, 4rem)', { lineHeight: '1.05', letterSpacing: '-1px' }],
         'display-sm': ['clamp(1.75rem, 3.2vw, 2.625rem)', { lineHeight: '1.13', letterSpacing: '-1px' }],
-        'display-xs': ['clamp(1.3125rem, 1.9vw, 1.625rem)', { lineHeight: '1.28', letterSpacing: '-0.5px' }],
-        body: ['1.0625rem', { lineHeight: '1.6', letterSpacing: '-0.1px' }],
-        nav: ['0.875rem', { lineHeight: '1.4', letterSpacing: '-0.1px' }],
+        'display-xs': ['clamp(1.3125rem, 1.9vw, 1.625rem)', { lineHeight: '1.28', letterSpacing: '-1px' }],
+        body: ['1.0625rem', { lineHeight: '1.6', letterSpacing: '-1px' }],
+        nav: ['0.875rem', { lineHeight: '1.4', letterSpacing: '-1px' }],
         eyebrow: ['0.6875rem', { lineHeight: '1.2', letterSpacing: '0.1em' }],
       },
       spacing: {

@@ -59,8 +59,24 @@
     color: var(--text);
     font-size: 1.125rem;
     line-height: 1.7;
+    /* Global tracking. Set here so it cascades to every element rather than
+       being reapplied per component. */
+    letter-spacing: -1px;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+  }
+
+  /**
+   * The single exception to the -1px rule.
+   *
+   * Uppercase text has no ascender/descender silhouette to read by, so it
+   * relies entirely on inter-letter space to stay parseable. At 11px, -1px
+   * removes roughly 9% of every character's width and the words collide into
+   * an unreadable block. Small-caps labels therefore keep positive tracking.
+   */
+  .tracking-label,
+  [class*='text-eyebrow'] {
+    letter-spacing: 0.1em;
   }
 
   /* Visible focus states everywhere (WCAG 2.4.7) */

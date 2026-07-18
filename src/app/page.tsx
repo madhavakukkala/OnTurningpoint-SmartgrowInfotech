@@ -123,7 +123,7 @@ export default function HomePage() {
                   href={item.href}
                   className="group flex flex-col gap-2 border-b border-line py-8 transition-colors hover:bg-surface md:flex-row md:items-center md:gap-10 md:px-4"
                 >
-                  <h3 className="text-2xl font-bold tracking-tight text-ink md:w-[38%] md:shrink-0">
+                  <h3 className="text-2xl font-bold tracking-[-1px] text-ink md:w-[38%] md:shrink-0">
                     {item.title}
                   </h3>
                   <p className="flex-1 text-base text-ink-muted">{item.body}</p>

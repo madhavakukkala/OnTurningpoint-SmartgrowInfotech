@@ -72,7 +72,7 @@ export function ContactForm() {
         role="status"
         className="rounded-card bg-section-blue p-10 md:p-12"
       >
-        <h3 className="text-2xl font-bold tracking-tight text-ink">Thank you — we have your enquiry.</h3>
+        <h3 className="text-2xl font-bold tracking-[-1px] text-ink">Thank you — we have your enquiry.</h3>
         <p className="mt-4 max-w-prose text-base leading-relaxed text-ink-muted">
           Our team will get back to you within 24 hours. If it is urgent, call us on any of the
           numbers listed above.

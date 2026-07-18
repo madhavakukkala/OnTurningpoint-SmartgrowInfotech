@@ -35,7 +35,7 @@ export function FAQ({ items, idPrefix = 'faq' }: { items: readonly FaqItem[]; id
                 onClick={() => setOpen(isOpen ? null : i)}
                 className="flex w-full items-start justify-between gap-6 py-6 text-left transition-colors hover:text-primary"
               >
-                <span className="text-lg font-semibold tracking-tight text-ink">{item.q}</span>
+                <span className="text-lg font-semibold tracking-[-1px] text-ink">{item.q}</span>
                 <span
                   aria-hidden="true"
                   className="mt-1 shrink-0 transition-transform duration-300 ease-brand"

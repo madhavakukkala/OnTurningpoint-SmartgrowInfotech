@@ -40,7 +40,7 @@ export function Footer() {
               aria-label={`${company.name} — home`}
             >
               <Image src="/logo/logo-mark.svg" alt="" width={22} height={28} className="h-7 w-auto" />
-              <span className="text-[0.9375rem] font-semibold tracking-[-0.2px] text-ink">
+              <span className="text-[0.9375rem] font-semibold tracking-[-1px] text-ink">
                 {company.name}
               </span>
             </Link>
@@ -128,6 +128,10 @@ export function Footer() {
       <Reveal className="select-none px-4 md:px-8">
         <span
           aria-hidden="true"
+          /* The one place tracking stays proportional rather than -1px. At up to
+             248px, a flat -1px is ~0.4% of the em and reads LOOSER than default —
+             the opposite of the packed setting used everywhere else. -0.045em
+             keeps the wordmark visually as tight as the rest of the site. */
           className="mx-auto block max-w-container text-center font-bold leading-[0.78] tracking-[-0.045em] text-ink"
           style={{ fontSize: 'clamp(3.5rem, 15.1vw, 15.5rem)' }}
         >

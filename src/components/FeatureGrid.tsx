@@ -32,7 +32,7 @@ export function FeatureGrid({
   }[columns];
 
   return (
-    <RevealGroup as="div" className={cn('grid gap-6', colClass, className)}>
+    <RevealGroup as="div" className={cn('grid gap-2.5', colClass, className)}>
       {items.map((item, i) => (
         <RevealItem key={item.title}>
           <Card
@@ -73,7 +73,7 @@ export function CheckList({
   const colClass = { 1: '', 2: 'sm:grid-cols-2', 3: 'sm:grid-cols-2 lg:grid-cols-3' }[columns];
 
   return (
-    <RevealGroup as="ul" className={cn('grid gap-x-10 gap-y-4', colClass, className)}>
+    <RevealGroup as="ul" className={cn('grid gap-x-8 gap-y-2.5', colClass, className)}>
       {items.map((item) => (
         <RevealItem as="li" key={item} className="flex gap-4 border-b border-line pb-4">
           <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
