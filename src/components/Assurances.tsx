@@ -35,7 +35,7 @@ export function Assurances({ items = assurances }: { items?: readonly Assurance[
             {items.map((item) => (
               <RevealItem as="li" key={item.title}>
                 <span aria-hidden="true" className="block h-px w-full bg-line" />
-                <h3 className="mt-5 text-[1rem] font-semibold text-ink">{item.title}</h3>
+                <h3 className="mt-5 text-[1rem] font-semibold text-heading">{item.title}</h3>
                 <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-ink-muted">
                   {item.body}
                 </p>

@@ -36,7 +36,7 @@ export default function ContactPage() {
           <div className="grid gap-16 lg:grid-cols-12 lg:gap-20">
             {/* Details */}
             <div className="lg:col-span-5">
-              <h2 id="contact-details-heading" className="text-display-xs font-bold text-ink">
+              <h2 id="contact-details-heading" className="text-display-xs font-bold text-heading">
                 Come and see us
               </h2>
               <div className="mt-10">
@@ -46,7 +46,7 @@ export default function ContactPage() {
 
             {/* Form */}
             <div className="lg:col-span-7">
-              <h2 className="text-display-xs font-bold text-ink">Send an enquiry</h2>
+              <h2 className="text-display-xs font-bold text-heading">Send an enquiry</h2>
               <div className="mt-10">
                 <ContactForm />
               </div>
@@ -58,7 +58,7 @@ export default function ContactPage() {
       {/* Map */}
       <Section aria-labelledby="map-heading">
         <Container>
-          <h2 id="map-heading" className="text-display-xs font-bold text-ink">
+          <h2 id="map-heading" className="text-display-xs font-bold text-heading">
             Find the branch
           </h2>
           <p className="mt-4 max-w-prose text-base text-ink-muted">{contact.addressOneLine}</p>

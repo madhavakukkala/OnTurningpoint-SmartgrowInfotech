@@ -177,7 +177,7 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
 
                 <div>
                   <Reveal>
-                    <h2 className="text-display-xs font-bold text-ink">{country.visa.name}</h2>
+                    <h2 className="text-display-xs font-bold text-heading">{country.visa.name}</h2>
                     <p className="mt-4 max-w-prose text-base leading-relaxed text-ink-muted">
                       {country.visa.summary}
                     </p>
@@ -205,7 +205,7 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-display-xs font-bold text-ink">Scholarships</h3>
+                  <h3 className="text-display-xs font-bold text-heading">Scholarships</h3>
                   <CheckList items={country.scholarships} columns={1} className="mt-8" />
                 </div>
               </div>

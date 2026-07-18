@@ -49,7 +49,7 @@ export function Footer() {
                   height={28}
                   className="h-7 w-auto"
                 />
-                <span className="text-[1.0625rem] font-semibold text-ink">{company.name}</span>
+                <span className="text-[1.0625rem] font-semibold text-heading">{company.name}</span>
               </Link>
 
               <p className="mt-5 max-w-sm text-[0.9375rem] leading-relaxed text-ink-muted">

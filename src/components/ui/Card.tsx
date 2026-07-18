@@ -51,7 +51,9 @@ export function Card({
 }
 
 export function CardTitle({ children, className }: { children: ReactNode; className?: string }) {
-  return <h3 className={cn('text-xl font-bold tracking-tight text-ink', className)}>{children}</h3>;
+  return (
+    <h3 className={cn('text-xl font-bold tracking-[-0.5px] text-heading', className)}>{children}</h3>
+  );
 }
 
 export function CardBody({ children, className }: { children: ReactNode; className?: string }) {

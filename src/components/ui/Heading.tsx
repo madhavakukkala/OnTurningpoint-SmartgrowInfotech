@@ -45,7 +45,7 @@ export function Heading({
   return (
     <Tag
       id={id}
-      className={cn(sizeClass[size], balance && '[text-wrap:balance]', 'text-ink', className)}
+      className={cn(sizeClass[size], balance && '[text-wrap:balance]', 'text-heading', className)}
     >
       {children}
       {accent ? (

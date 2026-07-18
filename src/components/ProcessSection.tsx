@@ -81,7 +81,7 @@ export function ProcessSection({
                 </span>
               </div>
 
-              <h3 className="mt-5 text-[1.125rem] font-semibold tracking-[-0.5px] text-ink">
+              <h3 className="mt-5 text-[1.125rem] font-semibold tracking-[-0.5px] text-heading">
                 {/* The visible number is decorative above; screen readers get the
                     ordinal from the <ol>, so it is not repeated here. */}
                 {step.title}

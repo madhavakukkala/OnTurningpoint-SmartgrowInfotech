@@ -24,6 +24,8 @@ const config: Config = {
           DEFAULT: 'var(--accent)',
           bright: 'var(--accent-bright)',
         },
+        /* Headings carry the brand navy; ink.* is neutral body copy. */
+        heading: 'var(--heading)',
         ink: {
           DEFAULT: 'var(--text)',
           muted: 'var(--text-muted)',

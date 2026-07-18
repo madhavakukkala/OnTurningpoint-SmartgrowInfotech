@@ -16,9 +16,10 @@ const T = {
   accent: '#1D5A79',
   accentBright: '#287094',
   panel: '#021D29',
-  text: '#023246',
-  muted: '#40606F',
-  subtle: '#4C6874',
+  heading: '#023246',
+  text: '#1C1C1C',
+  muted: '#575757',
+  subtle: '#616161',
   white: '#FFFFFF',
 };
 
@@ -65,6 +66,7 @@ const grounds = [
 const checks = [
   // Body text across every ground
   ...grounds.flatMap(([g, bg]) => [
+    [`heading on ${g}`, T.heading, bg, 4.5],
     [`text on ${g}`, T.text, bg, 4.5],
     [`text-muted on ${g}`, T.muted, bg, 4.5],
     [`text-subtle on ${g}`, T.subtle, bg, 4.5],

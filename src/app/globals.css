@@ -35,10 +35,21 @@
   --accent: #1d5a79;
   --accent-bright: #287094;
 
-  /* Text — navy rather than neutral grey, so body copy belongs to the palette */
-  --text: #023246;
-  --text-muted: #40606f;
-  --text-subtle: #4c6874;
+  /**
+   * Headings take the deep navy; body copy stays neutral.
+   *
+   * Tinting every paragraph navy made long passages feel washed and cost the
+   * page its contrast hierarchy — everything belonged to one colour, so nothing
+   * led. Colour now marks structure (headings, links, CTAs) while running text
+   * stays neutral and readable.
+   */
+  --heading: #023246;
+
+  /* Body text — neutral greys, deliberately outside the palette */
+  --text: #1c1c1c;
+  --text-muted: #575757;
+  /* #616161 is the lightest that still clears AA on the warm tint (4.80:1). */
+  --text-subtle: #616161;
 
   /* Quiet section tints — accents ONLY, never the page background */
   --section-cool: #e9f1f6; /* teal, heavily diluted */

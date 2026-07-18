@@ -123,7 +123,7 @@ export function Nav() {
             <span
               className={cn(
                 'text-[0.9375rem] font-semibold tracking-[-0.5px] transition-colors duration-300',
-                onDarkHero ? 'text-white' : 'text-ink'
+                onDarkHero ? 'text-white' : 'text-heading'
               )}
             >
               {company.name}
@@ -272,7 +272,7 @@ export function Nav() {
               className={cn(
                 'flex h-11 w-11 items-center justify-center rounded-pill transition-all duration-500 ease-brand lg:hidden',
                 scrolled && 'glass',
-                onDarkHero ? 'text-white' : 'text-ink'
+                onDarkHero ? 'text-white' : 'text-heading'
               )}
               aria-expanded={mobileOpen}
               aria-controls={`${menuId}-mobile`}

@@ -154,7 +154,7 @@ export function ServiceIndex({ items }: { items: readonly ServiceItem[] }) {
                 {/* Title — slides right on hover */}
                 <h3
                   className={cn(
-                    'flex-1 text-[1.375rem] font-semibold text-ink transition-transform duration-500 ease-brand md:text-[1.75rem] md:flex-none md:w-[38%]',
+                    'flex-1 text-[1.375rem] font-semibold text-heading transition-transform duration-500 ease-brand md:text-[1.75rem] md:flex-none md:w-[38%]',
                     'motion-safe:group-hover:translate-x-2'
                   )}
                 >
