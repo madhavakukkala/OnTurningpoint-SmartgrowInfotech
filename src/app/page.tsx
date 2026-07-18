@@ -8,7 +8,7 @@ import { TrustBand } from '@/components/TrustBand';
 import { ProcessSection } from '@/components/ProcessSection';
 import { Assurances } from '@/components/Assurances';
 import { Testimonials } from '@/components/Testimonials';
-import { testimonialsPlaceholder } from '@/content/testimonials';
+import { testimonials } from '@/content/testimonials';
 import { ImageStatement } from '@/components/ImageStatement';
 import { company } from '@/content/company';
 // Marquee is now rendered inside TrustBand rather than directly.
@@ -148,9 +148,7 @@ export default function HomePage() {
 
       <Assurances />
 
-      {/* ⚠️ Quotes are still bracketed placeholders — see src/content/testimonials.ts.
-          Replace them with real, permissioned student quotes before launch. */}
-      <Testimonials items={testimonialsPlaceholder} />
+      <Testimonials items={testimonials} />
 
       {/* ---------------------------------------------------------------- */}
       {/* Full-bleed statement                                              */}

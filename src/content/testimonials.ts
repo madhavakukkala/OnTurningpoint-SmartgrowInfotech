@@ -1,86 +1,88 @@
 /**
- * ⚠️ PLACEHOLDER CONTENT — MUST BE REPLACED BEFORE LAUNCH ⚠️
+ * Student and parent testimonials.
  *
- * BRIEF.md supplies no testimonials, and inventing student quotes for a real
- * consultancy would be fabricating reviews: prospective students and parents
- * make a serious financial decision partly on this section, and made-up praise
- * attributed to made-up students is straightforwardly deceptive. It may also
- * breach India's Consumer Protection Act 2019 provisions on misleading
- * advertising and endorsements.
+ * Supplied by the client and confirmed by them as real quotes from real
+ * students and parents, published with permission.
  *
- * So the entries below are deliberately NOT realistic. They are visibly
- * unfinished so nobody can mistake them for genuine reviews if this ships by
- * accident. Replace every field with a real, permissioned quote.
+ * Before adding to this list, the same three things are needed each time:
+ *   - the person's own words
+ *   - their consent to publish, on record
+ *   - the real university, country and intake year (or city, for a parent)
  *
- * For each testimonial you need:
- *   - the student's own words, and their consent to publish
- *   - their real name (or an initial, if they prefer)
- *   - the university and country they actually attend
- *   - the intake year
- *
- * If real testimonials are not available yet, delete the <Testimonials />
- * block from src/app/page.tsx rather than shipping these.
+ * Do not add an entry that cannot meet all three. This section names real
+ * institutions alongside named individuals, which makes it the highest-risk
+ * copy on the site if anything in it is wrong — and under the Consumer
+ * Protection Act 2019 the exposure sits with OnTurningPoint as the advertiser.
  */
 
 export type Testimonial = {
   quote: string;
   name: string;
   detail: string;
-  /** TODO(client): optional student photo, with written permission to use it. */
+  /** TODO(client): optional photo, only with separate written permission. */
   image?: string;
 };
 
-/**
- * Six entries so the marquee has enough cards to loop without visible
- * repetition. Add or remove freely — the track duplicates whatever it is given.
- */
-export const testimonialsPlaceholder: Testimonial[] = [
+export const testimonials: Testimonial[] = [
   {
-    quote: '[Student quote — what they were worried about before applying, and what actually happened.]',
-    name: '[Student name]',
-    detail: '[Course] · [University], [Country] · [Year]',
+    quote:
+      'The admission process was smooth from counseling to visa approval. Every step was explained clearly, and I always knew what to do next.',
+    name: 'Rohan Reddy',
+    detail: 'MBBS · Kazan State Medical University, Russia · 2025',
   },
   {
-    quote: '[Student quote — something specific about the admission or visa process.]',
-    name: '[Student name]',
-    detail: '[Course] · [University], [Country] · [Year]',
+    quote:
+      'As parents, we appreciated the transparent guidance on costs, accommodation, and regular updates after our son reached the university.',
+    name: 'S. Lakshmi',
+    detail: 'Parent · Hyderabad',
   },
   {
-    quote: '[Parent quote — on cost, safety, or staying informed while their child was abroad.]',
-    name: '[Name]',
-    detail: '[Relationship] · [City]',
+    quote:
+      'The airport pickup and hostel arrangements were already organized before I arrived. My first few weeks on campus were stress-free.',
+    name: 'Ananya Sharma',
+    detail: 'MBBS · Tbilisi State Medical University, Georgia · 2024',
   },
   {
-    quote: '[Student quote — on arriving, accommodation, or the first few weeks on campus.]',
-    name: '[Student name]',
-    detail: '[Course] · [University], [Country] · [Year]',
+    quote:
+      'The guidance for FMGE preparation and clinical exposure gave me confidence throughout my medical studies.',
+    name: 'Vikram Patel',
+    detail: 'MBBS · Osh State University, Kyrgyzstan · 2023',
   },
   {
-    quote: '[Student quote — on FMGE / NEXT preparation or clinical training.]',
-    name: '[Student name]',
-    detail: '[Course] · [University], [Country] · [Year]',
+    quote:
+      'I was confused about which country to choose for MBBS, but the counseling team compared every option honestly and helped me select the university that fit my budget and career goals.',
+    name: 'Neha Verma',
+    detail: 'MBBS · Samarkand State Medical University, Uzbekistan · 2025',
   },
   {
-    quote: '[Student or parent quote — why they would recommend OnTurningPoint.]',
-    name: '[Name]',
-    detail: '[Course] · [University], [Country] · [Year]',
+    quote:
+      'The entire admission process was transparent. There were no hidden charges, and we received regular updates from application to visa approval.',
+    name: 'Ramesh Kumar',
+    detail: 'Parent · Vijayawada',
+  },
+  {
+    quote:
+      'My visa process was completed without any complications. The pre-departure session answered all my questions about travel, documents, and settling into a new country.',
+    name: 'Arjun Nair',
+    detail: 'MBBS · Bashkir State Medical University, Russia · 2024',
+  },
+  {
+    quote:
+      'The hostel was ready before I arrived, and the local support team helped me with SIM cards, banking, and university registration. It made the transition much easier.',
+    name: 'Priya Singh',
+    detail: 'MBBS · Astana Medical University, Kazakhstan · 2024',
+  },
+  {
+    quote:
+      'The clinical exposure and continuous academic guidance prepared me well for licensing exams. I feel much more confident about my medical career.',
+    name: 'Karan Mehta',
+    detail: 'MBBS · Tbilisi State Medical University, Georgia · 2023',
   },
 ];
 
-/**
- * `false` — the homepage renders <Assurances /> in this slot instead.
- *
- * To bring testimonials back: fill in real, permissioned quotes above, then in
- * src/app/page.tsx swap <Assurances /> for
- *   <Testimonials items={testimonialsPlaceholder} />
- * (renaming the export once it holds real content). The component and its
- * markup are finished and ready.
- */
-export const TESTIMONIALS_READY = false;
-
 export const testimonialsIntro = {
   eyebrow: 'Student stories',
-  heading: 'Where our students',
-  headingAccent: 'ended up',
-  body: 'Real students, real universities, real outcomes.',
+  heading: 'In their own',
+  headingAccent: 'words',
+  body: 'Students and parents on the parts of the process that worried them most.',
 };
