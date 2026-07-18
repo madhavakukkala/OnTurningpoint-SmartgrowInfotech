@@ -40,12 +40,12 @@ export function Footer() {
               aria-label={`${company.name} — home`}
             >
               <Image src="/logo/logo-mark.svg" alt="" width={22} height={28} className="h-7 w-auto" />
-              <span className="text-[0.9375rem] font-semibold tracking-[-1px] text-ink">
+              <span className="text-[0.9375rem] font-semibold tracking-[-0.5px] text-ink">
                 {company.name}
               </span>
             </Link>
 
-            <p className="max-w-sm text-[1.625rem] font-bold leading-[1.25] tracking-[-1px] text-ink">
+            <p className="max-w-sm text-[1.625rem] font-bold leading-[1.25] tracking-[-0.5px] text-ink">
               Your turning point <span className="accent font-normal text-ink-muted">starts here.</span>
             </p>
             <Link

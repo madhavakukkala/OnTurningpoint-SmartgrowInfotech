@@ -4,11 +4,12 @@ import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/ui/Reveal';
 import { Hero } from '@/components/Hero';
 import { ServiceIndex } from '@/components/ServiceIndex';
+import { TrustBand } from '@/components/TrustBand';
 import { ProcessSection } from '@/components/ProcessSection';
+// Marquee is now rendered inside TrustBand rather than directly.
 import { FeatureGrid } from '@/components/FeatureGrid';
 import { CountryGrid } from '@/components/CountryCard';
 import { Stats } from '@/components/Stats';
-import { Marquee } from '@/components/Marquee';
 import { CTABand } from '@/components/CTABand';
 import { home } from '@/content/home';
 import { mbbs } from '@/content/mbbs';
@@ -38,10 +39,8 @@ export default function HomePage() {
     <>
       <Hero />
 
-      {/* Trust signal marquee */}
-      <div className="border-y border-line">
-        <Marquee items={trustSignals} />
-      </div>
+      {/* Trust band — soft wash, no rules */}
+      <TrustBand items={trustSignals} />
 
       {/* ---------------------------------------------------------------- */}
       {/* Metrics                                                           */}

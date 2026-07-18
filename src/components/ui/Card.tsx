@@ -10,7 +10,8 @@ const toneClass: Record<CardTone, string> = {
   blue: 'bg-section-blue',
   lavender: 'bg-section-lavender',
   sand: 'bg-section-sand',
-  outline: 'border border-line bg-white',
+  /* Formerly a hairline outline — cards now separate by fill alone. */
+  outline: 'bg-surface',
 };
 
 /**

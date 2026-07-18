@@ -110,7 +110,7 @@ export function Nav() {
               priority
               className="h-6 w-auto"
             />
-            <span className="text-[0.9375rem] font-semibold tracking-[-1px] text-ink">
+            <span className="text-[0.9375rem] font-semibold tracking-[-0.5px] text-ink">
               {company.name}
             </span>
           </Link>
@@ -207,7 +207,7 @@ export function Nav() {
                                   href={link.href}
                                   className="block rounded-md2 px-3.5 py-2.5 transition-colors duration-200 hover:bg-primary/[0.05]"
                                 >
-                                  <span className="block text-[0.8125rem] font-semibold tracking-[-1px] text-ink">
+                                  <span className="block text-[0.8125rem] font-semibold tracking-[-0.5px] text-ink">
                                     {link.label}
                                   </span>
                                   {link.description && (
@@ -279,7 +279,7 @@ export function Nav() {
                       <Link
                         href={item.href}
                         aria-current={isActive(item.href) ? 'page' : undefined}
-                        className="block border-b border-line py-3.5 text-xl font-semibold tracking-[-1px] text-ink"
+                        className="block border-b border-line py-3.5 text-xl font-semibold tracking-[-0.5px] text-ink"
                       >
                         {item.label}
                       </Link>

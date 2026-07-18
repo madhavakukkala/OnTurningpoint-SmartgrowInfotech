@@ -82,7 +82,7 @@ export function Loader() {
               </motion.svg>
 
               {/* Wordmark — letters rise behind a clipping mask */}
-              <span className="flex overflow-hidden text-2xl font-semibold tracking-[-1px] text-ink">
+              <span className="flex overflow-hidden text-2xl font-semibold tracking-[-0.5px] text-ink">
                 {letters.map((ch, i) => (
                   <motion.span
                     key={i}

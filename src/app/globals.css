@@ -61,7 +61,7 @@
     line-height: 1.7;
     /* Global tracking. Set here so it cascades to every element rather than
        being reapplied per component. */
-    letter-spacing: -1px;
+    letter-spacing: -0.5px;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }

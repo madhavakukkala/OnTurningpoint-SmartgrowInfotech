@@ -15,7 +15,7 @@ export function Stats({ items }: { items: readonly Stat[] }) {
     >
       {items.map((s) => (
         <RevealItem as="li" key={s.label} className="border-t border-line pt-6">
-          <p className="text-4xl font-extrabold tracking-[-1px] text-ink md:text-5xl">{s.value}</p>
+          <p className="text-4xl font-extrabold tracking-[-0.5px] text-ink md:text-5xl">{s.value}</p>
           <p className="mt-2 text-sm leading-snug text-ink-muted">{s.label}</p>
         </RevealItem>
       ))}

@@ -68,6 +68,8 @@ const checks = [
   ['white/80 on primary (footer links)', overWhite(T.primary, 0.8), T.primary, 4.5],
   ['white/60 on primary (labels)', overWhite(T.primary, 0.6), T.primary, 4.5],
   ['white/50 on primary (small print)', overWhite(T.primary, 0.5), T.primary, 4.5],
+  ['text-subtle on trust-band wash', T.subtle, '#F6F6F7', 4.5],
+  ['text-muted on trust-band wash', T.muted, '#F6F6F7', 4.5],
 ];
 
 let failures = 0;

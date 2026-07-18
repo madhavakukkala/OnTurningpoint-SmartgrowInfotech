@@ -37,7 +37,7 @@ export function CountryCard({ country }: { country: Country }) {
         {/* Copy */}
         <div className="absolute inset-x-0 bottom-0 p-6 md:p-7">
           <div className="flex items-start justify-between gap-4">
-            <h3 className="text-[1.375rem] font-semibold tracking-[-1px] text-white">
+            <h3 className="text-[1.375rem] font-semibold tracking-[-0.5px] text-white">
               {country.name}
             </h3>
             <span
@@ -64,7 +64,7 @@ export function CountryCard({ country }: { country: Country }) {
 
 export function CountryGrid({ items }: { items: readonly Country[] }) {
   return (
-    <RevealGroup as="ul" className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3" step={0.06}>
+    <RevealGroup as="ul" className="grid gap-1.5 sm:grid-cols-2 lg:grid-cols-3" step={0.06}>
       {items.map((c) => (
         <RevealItem as="li" key={c.slug}>
           <CountryCard country={c} />

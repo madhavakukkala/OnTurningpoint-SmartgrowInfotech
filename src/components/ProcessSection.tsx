@@ -56,7 +56,7 @@ export function ProcessSection({
         {/* Numbered image cards */}
         <RevealGroup
           as="ol"
-          className="mt-14 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-14 grid gap-1.5 sm:grid-cols-2 lg:grid-cols-3"
           step={0.07}
         >
           {steps.map((step, i) => (
@@ -81,7 +81,7 @@ export function ProcessSection({
                 </span>
               </div>
 
-              <h3 className="mt-5 text-[1.125rem] font-semibold tracking-[-1px] text-ink">
+              <h3 className="mt-5 text-[1.125rem] font-semibold tracking-[-0.5px] text-ink">
                 {/* The visible number is decorative above; screen readers get the
                     ordinal from the <ol>, so it is not repeated here. */}
                 {step.title}

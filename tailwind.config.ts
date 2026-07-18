@@ -38,32 +38,16 @@ const config: Config = {
       },
       fontSize: {
         /**
-         * Restrained display scale. Tracking is held around -0.5px to -1px at
-         * the sizes each step actually renders at — tight enough to feel
-         * engineered, loose enough that the counters stay open. Sizes are
-         * deliberately smaller than a typical "hero" scale; confidence reads
-         * as restraint, not as bigger type.
+         * Sentence-case display scale, tracked at a flat -0.5px everywhere.
+         * Fixed px rather than em keeps the value exact at every step instead
+         * of scaling with size. Uppercase labels are the one exception and keep
+         * positive tracking — see globals.css.
          */
-        /**
-         * Sentence-case display scale.
-         * Tracking is close to normal — the reference sets its headings almost
-         * untracked and lets weight carry the emphasis. Slight negative values
-         * only, to stop large sizes from looking loose.
-         */
-        /**
-         * Tracking is a literal -1px on headings, as specified. Fixed px rather
-         * than em is deliberate here: it keeps the requested value exact at
-         * every step instead of scaling with size.
-         *
-         * Body and small text stay near-neutral — -1px on 17px body would close
-         * the counters and cost legibility. The reference pairs tight headings
-         * with normally-spaced body for the same reason.
-         */
-        display: ['clamp(2.5rem, 5vw, 4rem)', { lineHeight: '1.05', letterSpacing: '-1px' }],
-        'display-sm': ['clamp(1.75rem, 3.2vw, 2.625rem)', { lineHeight: '1.13', letterSpacing: '-1px' }],
-        'display-xs': ['clamp(1.3125rem, 1.9vw, 1.625rem)', { lineHeight: '1.28', letterSpacing: '-1px' }],
-        body: ['1.0625rem', { lineHeight: '1.6', letterSpacing: '-1px' }],
-        nav: ['0.875rem', { lineHeight: '1.4', letterSpacing: '-1px' }],
+        display: ['clamp(2.5rem, 5vw, 4rem)', { lineHeight: '1.05', letterSpacing: '-0.5px' }],
+        'display-sm': ['clamp(1.75rem, 3.2vw, 2.625rem)', { lineHeight: '1.13', letterSpacing: '-0.5px' }],
+        'display-xs': ['clamp(1.3125rem, 1.9vw, 1.625rem)', { lineHeight: '1.28', letterSpacing: '-0.5px' }],
+        body: ['1.0625rem', { lineHeight: '1.6', letterSpacing: '-0.5px' }],
+        nav: ['0.875rem', { lineHeight: '1.4', letterSpacing: '-0.5px' }],
         eyebrow: ['0.6875rem', { lineHeight: '1.2', letterSpacing: '0.1em' }],
       },
       spacing: {
@@ -78,14 +62,14 @@ const config: Config = {
       },
       borderRadius: {
         /**
-         * Tightened from the original 32px. Large radii on large surfaces read
-         * as soft/consumer; premium editorial work keeps the corner subtle so
-         * the eye reads the grid, not the rounding.
+         * Minimal radii. Down from 32px originally: at this size the corner
+         * stops being a visual feature and the eye reads the grid instead of
+         * the rounding. Buttons stay fully pill for contrast.
          */
-        card: '0.625rem', // 10px — cards, panels
-        media: '0.75rem', // 12px — photographic surfaces
-        md2: '0.5rem',
-        lg2: '0.625rem',
+        card: '0.25rem', // 4px — cards, panels
+        media: '0.375rem', // 6px — photographic surfaces
+        md2: '0.25rem',
+        lg2: '0.375rem',
         pill: '999px',
       },
       boxShadow: {
