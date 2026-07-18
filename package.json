@@ -2,6 +2,10 @@
   "name": "onturningpoint-web",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "//": "Next.js 15 requires Node 18.18+. Pinned so a host that picks its own default cannot build against an older runtime and fail in ways that are hard to diagnose.",
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
