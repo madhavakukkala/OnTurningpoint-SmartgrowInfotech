@@ -15,7 +15,6 @@ import { company } from '@/content/company';
 import { FeatureGrid } from '@/components/FeatureGrid';
 import { CountryCarousel } from '@/components/CountryCarousel';
 import { Stats } from '@/components/Stats';
-import { CTABand } from '@/components/CTABand';
 import { home } from '@/content/home';
 import { mbbs } from '@/content/mbbs';
 import { countries } from '@/content/countries';
@@ -169,11 +168,13 @@ export default function HomePage() {
         secondaryCta={{ label: 'Explore destinations', href: '/countries' }}
       />
 
-      <CTABand
-        heading={home.cta.heading}
-        headingAccent={home.cta.headingAccent}
-        body={home.cta.body}
-      />
+      {/*
+        No <CTABand /> here on purpose. The ImageStatement directly above is
+        already the closing call to action, and the footer carries the full
+        contact block — a third dark panel repeating "Your turning point"
+        between them was redundant. CTABand still closes every other page,
+        where nothing else fills that role.
+      */}
     </>
   );
 }
