@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { Container } from '@/components/ui/Layout';
 import { Button } from '@/components/ui/Button';
 import { MagneticCursor } from '@/components/MagneticCursor';
@@ -13,23 +13,24 @@ import { EASE } from '@/lib/motion';
 import { cn } from '@/lib/cn';
 
 /**
- * Home hero — full-bleed photograph with the headline set over it, matching the
- * statement section further down the page.
+ * Home hero — near-black full-viewport panel with the copy in the left third
+ * and a supporting stat rail pinned to the bottom.
  *
- * The six-line headline is authored line by line (see home.hero.headlineLines)
- * rather than left to wrap, so every break lands where it was intended and each
- * line can mask up on its own beat. Line length is the constraint: past roughly
- * 34 characters a line re-wraps on laptop widths and the stagger falls apart.
+ * The photograph is retained but taken down to roughly 10% visibility, which is
+ * how the reference treats its own image: it reads as texture and depth in an
+ * otherwise black field rather than as a picture. Keeping it that low also
+ * means the white type sits on a near-uniform ground, so contrast does not
+ * depend on which part of the photo a line happens to land over.
  *
- * Legibility uses the same directional scrim as ImageStatement — heaviest on
- * the left under the copy, clearing to the right so the photograph survives.
+ * The section pulls itself up under the fixed nav with a negative margin that
+ * cancels the padding on <main>, so the panel runs edge to edge behind it.
  */
 
 const line = {
   hidden: { y: '110%' },
   show: (i: number) => ({
     y: 0,
-    transition: { delay: 0.1 + i * 0.075, duration: 0.8, ease: EASE },
+    transition: { delay: 0.12 + i * 0.09, duration: 0.85, ease: EASE },
   }),
 };
 
@@ -38,7 +39,7 @@ const fade = {
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: 0.55 + i * 0.09, duration: 0.55, ease: EASE },
+    transition: { delay: 0.3 + i * 0.1, duration: 0.6, ease: EASE },
   }),
 };
 
@@ -50,115 +51,113 @@ export function Hero() {
   const init = reduce ? undefined : 'hidden';
 
   return (
-    <section ref={sectionRef} className="relative isolate overflow-hidden">
+    <section
+      ref={sectionRef}
+      // Cancels the top padding on <main> so the panel sits behind the nav.
+      className="relative isolate -mt-24 flex min-h-[100svh] flex-col overflow-hidden bg-[#0B0708] md:-mt-28"
+    >
       <MagneticCursor containerRef={sectionRef} />
 
-      <div className="relative min-h-[42rem] md:min-h-[46rem] lg:min-h-[48rem]">
-        <Image
-          src={home.hero.image}
-          alt={home.hero.imageAlt}
-          fill
-          sizes="100vw"
-          className="-z-20 object-cover"
-          priority
-        />
+      <Image
+        src={home.hero.image}
+        alt={home.hero.imageAlt}
+        fill
+        sizes="100vw"
+        priority
+        className="-z-20 object-cover opacity-[0.14]"
+      />
+      {/* Vignette — keeps the lower rail and the left column sitting on true black */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(120%_90%_at_75%_35%,rgba(11,7,8,0.55)_0%,rgba(11,7,8,0.9)_60%,#0B0708_100%)]"
+      />
 
-        {/* Directional scrim — heavy under the copy, clearing right */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-gradient-to-r from-[rgba(18,10,9,0.9)] via-[rgba(18,10,9,0.62)] to-[rgba(18,10,9,0.2)]"
-        />
-        {/* Vertical softener for the stacked mobile layout */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-gradient-to-t from-[rgba(18,10,9,0.55)] to-transparent md:hidden"
-        />
+      {/* ---- Main copy ---- */}
+      <Container className="relative flex flex-1 items-center pb-16 pt-36 md:pt-40">
+        <div className="max-w-2xl">
+          {/* Eligibility line */}
+          <motion.p
+            custom={0}
+            variants={fade}
+            initial={init}
+            animate={anim}
+            className="flex items-center gap-2.5 text-[0.9375rem] text-white"
+          >
+            <Check aria-hidden="true" size={16} strokeWidth={2.25} />
+            {home.hero.eligibility}
+          </motion.p>
 
-        <Container className="relative flex min-h-[42rem] items-center py-24 md:min-h-[46rem] lg:min-h-[48rem]">
-          <div className="max-w-3xl">
-            {/* Eyebrow */}
-            <motion.p
-              custom={0}
-              variants={fade}
-              initial={init}
-              animate={anim}
-              className="flex items-center gap-3 text-eyebrow font-semibold uppercase text-white/60"
+          {/* Four-word headline across two lines */}
+          <h1 className="mt-5 text-display font-bold text-white">
+            {home.hero.headlineLines.map((l, i) => (
+              <span key={l.text} className="block overflow-hidden py-[0.055em]">
+                <motion.span
+                  custom={i}
+                  variants={line}
+                  initial={init}
+                  animate={anim}
+                  className={cn('block', l.accent && 'accent text-white/90')}
+                >
+                  {l.text}
+                </motion.span>
+              </span>
+            ))}
+          </h1>
+
+          <motion.p
+            custom={1}
+            variants={fade}
+            initial={init}
+            animate={anim}
+            className="mt-6 max-w-[46ch] text-[0.9375rem] font-medium text-white"
+          >
+            {home.hero.subhead}
+          </motion.p>
+
+          <motion.div
+            custom={2}
+            variants={fade}
+            initial={init}
+            animate={anim}
+            className="mt-10 flex flex-wrap items-center gap-3"
+          >
+            <Button href="/contact" variant="onDark">
+              {company.primaryCta}
+            </Button>
+            <Button
+              href="/mbbs-abroad"
+              className="bg-white/[0.12] text-white backdrop-blur-sm hover:bg-white/20"
             >
-              <span aria-hidden="true" className="h-px w-7 bg-white/40" />
-              Overseas education consultancy · Nellore
-            </motion.p>
+              Explore MBBS abroad
+            </Button>
+          </motion.div>
+        </div>
+      </Container>
 
-            {/* Six-line headline — one clipping box per line */}
-            <h1 className="mt-8 text-display font-bold text-white">
-              {home.hero.headlineLines.map((l, i) => (
-                <span key={l.text} className="block overflow-hidden py-[0.055em]">
-                  <motion.span
-                    custom={i}
-                    variants={line}
-                    initial={init}
-                    animate={anim}
-                    className={cn('block', l.accent && 'accent text-white/85')}
-                  >
-                    {l.text}
-                  </motion.span>
-                </span>
-              ))}
-            </h1>
-
-            {/* Subhead */}
-            <motion.p
-              custom={1}
-              variants={fade}
-              initial={init}
-              animate={anim}
-              className="mt-8 max-w-[52ch] text-body text-white/75"
+      {/* ---- Bottom stat rail ---- */}
+      <Container className="relative pb-12 md:pb-14">
+        <motion.dl
+          custom={3}
+          variants={fade}
+          initial={init}
+          animate={anim}
+          className="flex flex-wrap gap-y-6"
+        >
+          {home.hero.heroStats.map((s, i) => (
+            <div
+              key={s.label}
+              className={cn(
+                'pr-8 md:pr-10',
+                // Hairline rules between items, matching the reference
+                i > 0 && 'border-l border-white/20 pl-8 md:pl-10'
+              )}
             >
-              {home.hero.subhead}
-            </motion.p>
-
-            {/* Actions */}
-            <motion.div
-              custom={2}
-              variants={fade}
-              initial={init}
-              animate={anim}
-              className="mt-9 flex flex-wrap items-center gap-3"
-            >
-              <Button href="/contact" variant="onDark" className="group">
-                {company.primaryCta}
-                <ArrowRight
-                  aria-hidden="true"
-                  size={17}
-                  strokeWidth={2}
-                  className="transition-transform duration-300 ease-brand group-hover:translate-x-1"
-                />
-              </Button>
-              <Button
-                href="/mbbs-abroad"
-                className="border border-white/25 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
-              >
-                Explore MBBS abroad
-              </Button>
-            </motion.div>
-
-            {/* Inline trust row */}
-            <motion.ul
-              custom={3}
-              variants={fade}
-              initial={init}
-              animate={anim}
-              className="mt-12 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-white/15 pt-7"
-            >
-              {home.hero.highlights.map((item, i) => (
-                <li key={item} className="flex items-center gap-3">
-                  {i > 0 && <span aria-hidden="true" className="h-1 w-1 rounded-full bg-white/30" />}
-                  <span className="text-[0.8125rem] font-medium text-white/70">{item}</span>
-                </li>
-              ))}
-            </motion.ul>
-          </div>
-        </Container>
-      </div>
+              <dt className="text-[0.9375rem] font-semibold text-white">{s.label}</dt>
+              <dd className="mt-1 text-[0.9375rem] text-white/55">{s.detail}</dd>
+            </div>
+          ))}
+        </motion.dl>
+      </Container>
     </section>
   );
 }

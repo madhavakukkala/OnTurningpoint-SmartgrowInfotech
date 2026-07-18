@@ -7,13 +7,10 @@
  */
 export type HeadlineLine = { text: string; accent?: boolean };
 
+/** Four-word headline, broken across two lines like the reference. */
 const heroHeadlineLines: HeadlineLine[] = [
-  { text: 'Study MBBS' },
+  { text: 'Your MBBS degree' },
   { text: 'abroad', accent: true },
-  { text: 'at recognised universities,' },
-  { text: 'on fees you can plan for,' },
-  { text: 'with one team beside you' },
-  { text: 'from first call to graduation.' },
 ];
 
 export const home = {
@@ -36,6 +33,17 @@ export const home = {
     body: 'A medical seat abroad is reachable on marks most students already have, at a fraction of private-college fees in India. We tell you honestly what your profile can reach, then handle the university, the paperwork, the visa and the landing.',
     /** Inline trust row under the actions. Every item is verifiable — no counts. */
     highlights: ['NMC & WHO approved', '11 destinations', 'Fees from ₹3L a year', 'NEET-based admission'],
+    /** Single line beside the checkmark, above the headline. */
+    eligibility: 'NEET-qualified students welcome',
+    /**
+     * Bottom rail: label + supporting detail, mirroring the reference.
+     * Verifiable claims only — no student or partner counts.
+     */
+    heroStats: [
+      { label: 'Recognised', detail: 'NMC & WHO approved universities' },
+      { label: 'Affordable', detail: 'Total fees from ₹3 lakh a year' },
+      { label: 'Global', detail: '11 destination countries' },
+    ],
     footnote:
       'Fees, recognition status and timelines confirmed in writing before you commit. No capitation, no donation.',
     /** Unused since the hero became type-only; kept in case imagery returns. */

@@ -78,6 +78,14 @@ export function Nav() {
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(href + '/');
 
+  /**
+   * The homepage hero is a near-black panel that the nav floats over, so the
+   * default ink-on-transparent treatment would be invisible against it. Only
+   * the colours invert — the pill layout, spacing and behaviour are unchanged.
+   * Once scrolled, the glass pill takes over and normal colours resume.
+   */
+  const onDarkHero = pathname === '/' && !scrolled;
+
   return (
     <>
       <a
@@ -103,14 +111,21 @@ export function Nav() {
             aria-label={`${company.name} — home`}
           >
             <Image
-              src="/logo/logo-mark.svg"
+              /* White variant over the dark hero — both are generated from the
+                 same source SVG by `npm run logo`. */
+              src={onDarkHero ? '/logo/logo-mark-white.svg' : '/logo/logo-mark.svg'}
               alt=""
               width={22}
               height={28}
               priority
               className="h-6 w-auto"
             />
-            <span className="text-[0.9375rem] font-semibold tracking-[-0.5px] text-ink">
+            <span
+              className={cn(
+                'text-[0.9375rem] font-semibold tracking-[-0.5px] transition-colors duration-300',
+                onDarkHero ? 'text-white' : 'text-ink'
+              )}
+            >
               {company.name}
             </span>
           </Link>
@@ -136,14 +151,20 @@ export function Nav() {
                       <motion.span
                         layoutId="nav-active"
                         aria-hidden="true"
-                        className="absolute inset-0 rounded-pill bg-primary/[0.07]"
+                        className={cn(
+                          'absolute inset-0 rounded-pill',
+                          onDarkHero ? 'bg-white/15' : 'bg-primary/[0.07]'
+                        )}
                         transition={{ duration: 0.4, ease: EASE }}
                       />
                     )}
                     {active && reduce && (
                       <span
                         aria-hidden="true"
-                        className="absolute inset-0 rounded-pill bg-primary/[0.07]"
+                        className={cn(
+                          'absolute inset-0 rounded-pill',
+                          onDarkHero ? 'bg-white/15' : 'bg-primary/[0.07]'
+                        )}
                       />
                     )}
                     <span className="relative">{item.label}</span>
@@ -152,7 +173,13 @@ export function Nav() {
 
                 const cls = cn(
                   'relative flex items-center gap-1 rounded-pill px-4 py-2 text-nav font-medium transition-colors duration-300',
-                  active ? 'text-ink' : 'text-ink-muted hover:text-ink'
+                  onDarkHero
+                    ? active
+                      ? 'text-white'
+                      : 'text-white/70 hover:text-white'
+                    : active
+                      ? 'text-ink'
+                      : 'text-ink-muted hover:text-ink'
                 );
 
                 if (!submenu) {
@@ -230,7 +257,13 @@ export function Nav() {
 
           {/* CTA + mobile trigger */}
           <div className="flex shrink-0 items-center gap-2">
-            <Button href="/contact" className="hidden px-5 py-2.5 text-[0.8125rem] lg:inline-flex">
+            {/* Over the dark hero the filled espresso button would disappear,
+                so the white-on-dark variant takes over there. */}
+            <Button
+              href="/contact"
+              variant={onDarkHero ? 'onDark' : 'primary'}
+              className="hidden px-5 py-2.5 text-[0.8125rem] lg:inline-flex"
+            >
               {company.primaryCta}
             </Button>
 
@@ -238,7 +271,8 @@ export function Nav() {
               type="button"
               className={cn(
                 'flex h-11 w-11 items-center justify-center rounded-pill transition-all duration-500 ease-brand lg:hidden',
-                scrolled && 'glass'
+                scrolled && 'glass',
+                onDarkHero ? 'text-white' : 'text-ink'
               )}
               aria-expanded={mobileOpen}
               aria-controls={`${menuId}-mobile`}
