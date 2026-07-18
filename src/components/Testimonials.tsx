@@ -1,24 +1,35 @@
+'use client';
+
+import { Quote } from 'lucide-react';
 import { Container, Section, Eyebrow } from '@/components/ui/Layout';
 import { Heading, Lede } from '@/components/ui/Heading';
-import { Reveal, RevealGroup, RevealItem } from '@/components/ui/Reveal';
+import { Reveal } from '@/components/ui/Reveal';
 import { testimonialsIntro, type Testimonial } from '@/content/testimonials';
 
 /**
- * Student testimonials.
+ * Testimonials — a single row of cards drifting continuously right to left,
+ * fading out at both edges and pausing on hover or keyboard focus.
  *
- * Quotes are marked up as <blockquote>/<cite> rather than plain paragraphs, so
- * assistive tech announces them as attributed quotations rather than as body
- * copy in the site's own voice — which matters when the whole point is that
- * someone else said it.
+ * Mechanics: the set is rendered twice inside a `w-max` track that translates
+ * -50%, so the second copy arrives exactly where the first began and the loop
+ * is seamless. Same approach as the trust band.
  *
- * The homepage only renders this once TESTIMONIALS_READY is true; see
- * src/content/testimonials.ts.
+ * Accessibility:
+ * - Only the FIRST copy is exposed; the duplicate carries aria-hidden, so a
+ *   screen reader reads each quote once rather than twice.
+ * - Quotes use blockquote/cite, so they are announced as attributed quotations
+ *   rather than as copy in the site's own voice.
+ * - The track pauses on hover AND on focus-within, so a keyboard user tabbing
+ *   into a card is not carried off-screen mid-read.
+ * - The rail is a real scroll container. Under prefers-reduced-motion the
+ *   animation is disabled globally, and the row stays manually scrollable
+ *   rather than stranding the user on the first two cards.
  */
 export function Testimonials({ items }: { items: readonly Testimonial[] }) {
   return (
     <Section aria-labelledby="testimonials-heading">
       <Container>
-        <Reveal className="max-w-3xl">
+        <Reveal className="max-w-2xl">
           <Eyebrow>{testimonialsIntro.eyebrow}</Eyebrow>
           <Heading
             id="testimonials-heading"
@@ -27,30 +38,47 @@ export function Testimonials({ items }: { items: readonly Testimonial[] }) {
           >
             {testimonialsIntro.heading}
           </Heading>
-          <Lede className="mt-6">{testimonialsIntro.body}</Lede>
+          <Lede className="mt-5">{testimonialsIntro.body}</Lede>
         </Reveal>
-
-        <RevealGroup as="ul" className="mt-14 grid gap-1.5 md:grid-cols-3" step={0.07}>
-          {items.map((t, i) => (
-            <RevealItem as="li" key={i} className="h-full">
-              <figure className="flex h-full flex-col justify-between rounded-card bg-surface p-7 md:p-8">
-                <blockquote className="text-[1.0625rem] leading-relaxed text-ink">
-                  <p>{t.quote}</p>
-                </blockquote>
-
-                <figcaption className="mt-8 border-t border-line pt-5">
-                  <cite className="block not-italic text-[0.9375rem] font-semibold text-ink">
-                    {t.name}
-                  </cite>
-                  <span className="mt-1 block text-[0.8125rem] leading-snug text-ink-muted">
-                    {t.detail}
-                  </span>
-                </figcaption>
-              </figure>
-            </RevealItem>
-          ))}
-        </RevealGroup>
       </Container>
+
+      {/* Full-bleed rail — deliberately outside Container so cards run to the edges */}
+      <div className="group relative mt-12 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="edge-fade flex w-max gap-2.5 motion-safe:animate-marquee group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]">
+          {[0, 1].map((copy) => (
+            <ul
+              key={copy}
+              // The duplicate exists only to close the loop visually.
+              aria-hidden={copy === 1 ? 'true' : undefined}
+              className="flex shrink-0 gap-2.5"
+            >
+              {items.map((t, i) => (
+                <li key={`${copy}-${i}`} className="w-[19rem] shrink-0 sm:w-[22rem]">
+                  <figure className="flex h-full flex-col justify-between rounded-card bg-surface p-7">
+                    <Quote
+                      aria-hidden="true"
+                      size={20}
+                      strokeWidth={1.5}
+                      className="mb-5 text-ink-subtle"
+                    />
+                    <blockquote className="flex-1 text-[0.9375rem] leading-relaxed text-ink">
+                      <p>{t.quote}</p>
+                    </blockquote>
+                    <figcaption className="mt-7 border-t border-line pt-5">
+                      <cite className="block text-[0.875rem] font-semibold not-italic text-ink">
+                        {t.name}
+                      </cite>
+                      <span className="mt-1 block text-[0.8125rem] leading-snug text-ink-muted">
+                        {t.detail}
+                      </span>
+                    </figcaption>
+                  </figure>
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
+      </div>
     </Section>
   );
 }

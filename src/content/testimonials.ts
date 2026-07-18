@@ -30,21 +30,40 @@ export type Testimonial = {
   image?: string;
 };
 
+/**
+ * Six entries so the marquee has enough cards to loop without visible
+ * repetition. Add or remove freely — the track duplicates whatever it is given.
+ */
 export const testimonialsPlaceholder: Testimonial[] = [
   {
-    quote: '[Replace with a real student quote — their own words, with permission to publish.]',
+    quote: '[Student quote — what they were worried about before applying, and what actually happened.]',
     name: '[Student name]',
     detail: '[Course] · [University], [Country] · [Year]',
   },
   {
-    quote: '[Replace with a real student quote — their own words, with permission to publish.]',
+    quote: '[Student quote — something specific about the admission or visa process.]',
     name: '[Student name]',
     detail: '[Course] · [University], [Country] · [Year]',
   },
   {
-    quote: '[Replace with a real parent or student quote, with permission to publish.]',
+    quote: '[Parent quote — on cost, safety, or staying informed while their child was abroad.]',
     name: '[Name]',
     detail: '[Relationship] · [City]',
+  },
+  {
+    quote: '[Student quote — on arriving, accommodation, or the first few weeks on campus.]',
+    name: '[Student name]',
+    detail: '[Course] · [University], [Country] · [Year]',
+  },
+  {
+    quote: '[Student quote — on FMGE / NEXT preparation or clinical training.]',
+    name: '[Student name]',
+    detail: '[Course] · [University], [Country] · [Year]',
+  },
+  {
+    quote: '[Student or parent quote — why they would recommend OnTurningPoint.]',
+    name: '[Name]',
+    detail: '[Course] · [University], [Country] · [Year]',
   },
 ];
 
