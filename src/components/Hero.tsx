@@ -102,14 +102,25 @@ export function Hero() {
             variants={fade}
             initial={init}
             animate={anim}
-            className="mx-auto mt-7 max-w-[54ch] text-body text-ink-muted"
+            className="mx-auto mt-7 max-w-[54ch] text-body text-ink"
           >
             {home.hero.subhead}
           </motion.p>
 
+          {/* Secondary paragraph — carries the substance the photograph used to */}
+          <motion.p
+            custom={2}
+            variants={fade}
+            initial={init}
+            animate={anim}
+            className="mx-auto mt-5 max-w-[58ch] text-[0.9375rem] leading-relaxed text-ink-muted"
+          >
+            {home.hero.body}
+          </motion.p>
+
           {/* Actions */}
           <motion.div
-            custom={2}
+            custom={3}
             variants={fade}
             initial={init}
             animate={anim}
@@ -129,16 +140,33 @@ export function Hero() {
             </Button>
           </motion.div>
 
-          {/* Supporting line — carries the substance the image used to */}
-          <motion.p
-            custom={3}
+          {/* Inline trust row */}
+          <motion.ul
+            custom={4}
             variants={fade}
             initial={init}
             animate={anim}
-            className="mx-auto mt-10 max-w-[48ch] text-sm leading-relaxed text-ink-subtle"
+            className="mt-12 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 border-t border-line pt-8"
           >
-            NMC &amp; WHO approved universities across 11 countries. Fees, recognition and timelines
-            confirmed in writing before you commit.
+            {home.hero.highlights.map((item, i) => (
+              <li key={item} className="flex items-center gap-3">
+                {i > 0 && (
+                  <span aria-hidden="true" className="h-1 w-1 rounded-full bg-primary/25" />
+                )}
+                <span className="text-[0.8125rem] font-medium text-ink-muted">{item}</span>
+              </li>
+            ))}
+          </motion.ul>
+
+          {/* Qualifier */}
+          <motion.p
+            custom={5}
+            variants={fade}
+            initial={init}
+            animate={anim}
+            className="mx-auto mt-5 max-w-[52ch] text-[0.8125rem] leading-relaxed text-ink-subtle"
+          >
+            {home.hero.footnote}
           </motion.p>
         </div>
       </Container>

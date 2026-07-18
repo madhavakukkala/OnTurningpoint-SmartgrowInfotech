@@ -7,6 +7,13 @@ export const home = {
     headlineAccent: 'abroad',
     subhead:
       'Expert, transparent, end-to-end guidance for MBBS and study-abroad — from choosing the right university to settling in.',
+    /** Second paragraph, added so the hero carries substance without imagery. */
+    body: 'A medical seat abroad is reachable on marks most students already have, at a fraction of private-college fees in India. We tell you honestly what your profile can reach, then handle the university, the paperwork, the visa and the landing.',
+    /** Inline trust row under the actions. Every item is verifiable — no counts. */
+    highlights: ['NMC & WHO approved', '11 destinations', 'Fees from ₹3L a year', 'NEET-based admission'],
+    footnote:
+      'Fees, recognition status and timelines confirmed in writing before you commit. No capitation, no donation.',
+    /** Unused since the hero became type-only; kept in case imagery returns. */
     image: '/images/hero.jpg',
     imageAlt: 'A student walking through a bright university campus',
   },
