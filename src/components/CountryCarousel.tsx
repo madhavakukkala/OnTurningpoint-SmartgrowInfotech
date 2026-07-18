@@ -121,7 +121,7 @@ export function CountryCarousel({ items }: { items: readonly Country[] }) {
         <button
           type="button"
           onClick={() => page(-1)}
-          className="flex h-10 w-10 items-center justify-center rounded-pill border border-line text-ink transition-colors duration-300 hover:border-primary hover:bg-primary hover:text-white"
+          className="flex h-11 w-11 items-center justify-center rounded-pill border border-line text-ink transition-colors duration-300 hover:border-primary hover:bg-primary hover:text-white"
         >
           <span className="sr-only">Scroll destinations left</span>
           <ArrowLeft aria-hidden="true" size={16} strokeWidth={2} />
@@ -129,7 +129,7 @@ export function CountryCarousel({ items }: { items: readonly Country[] }) {
         <button
           type="button"
           onClick={() => page(1)}
-          className="flex h-10 w-10 items-center justify-center rounded-pill border border-line text-ink transition-colors duration-300 hover:border-primary hover:bg-primary hover:text-white"
+          className="flex h-11 w-11 items-center justify-center rounded-pill border border-line text-ink transition-colors duration-300 hover:border-primary hover:bg-primary hover:text-white"
         >
           <span className="sr-only">Scroll destinations right</span>
           <ArrowRight aria-hidden="true" size={16} strokeWidth={2} />

@@ -153,15 +153,20 @@ export function Hero() {
           variants={fade}
           initial={init}
           animate={anim}
-          className="flex flex-wrap gap-y-6"
+          /*
+            Stacked on mobile, inline from `sm` up. The dividers are gated to
+            `sm` deliberately: with flex-wrap they were reappearing at the start
+            of each wrapped line on narrow screens, so a stray vertical rule
+            floated to the left of the first item on every row.
+          */
+          className="grid grid-cols-1 gap-y-5 sm:flex sm:flex-wrap sm:gap-y-6"
         >
           {home.hero.heroStats.map((s, i) => (
             <div
               key={s.label}
               className={cn(
-                'pr-8 md:pr-10',
-                // Hairline rules between items, matching the reference
-                i > 0 && 'border-l border-white/20 pl-8 md:pl-10'
+                'sm:pr-8 md:pr-10',
+                i > 0 && 'sm:border-l sm:border-white/20 sm:pl-8 md:pl-10'
               )}
             >
               <dt className="text-[0.9375rem] font-semibold text-white">{s.label}</dt>
