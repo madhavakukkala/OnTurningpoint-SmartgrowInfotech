@@ -43,6 +43,34 @@
  * Apps Script serves the last DEPLOYED version, not the last saved one. After
  * editing you must Deploy → Manage deployments → edit → Version: New version.
  * Forgetting this is the usual reason a change appears to do nothing.
+ *
+ * ----------------------------------------------------------------------------
+ * TROUBLESHOOTING
+ * ----------------------------------------------------------------------------
+ * "This app is blocked — this app tried to access sensitive info in your
+ * Google Account"
+ *
+ *   Apps Script works out which permissions to request by scanning the whole
+ *   file, including functions that are never called. If anything in it touches
+ *   the mail, Gmail, Drive or Calendar services, it requests a *sensitive* scope, and
+ *   Google blocks unverified scripts that do. This file deliberately uses only
+ *   SpreadsheetApp, which is not sensitive.
+ *
+ *   If you hit this screen: make sure nothing has been added to the file that
+ *   sends email or touches Drive, save, then Deploy → Manage deployments →
+ *   New version and authorise again.
+ *
+ *   On a Google Workspace account, an administrator may block unverified apps
+ *   outright. Two ways through: have the admin allow it, or run the script
+ *   from a personal Gmail account that owns the sheet and share the sheet with
+ *   the team.
+ *
+ * "Authorization is required to perform that action" in the response
+ *   The deployment's "Execute as" is not set to Me, or authorisation was never
+ *   completed. Redeploy and approve the prompt.
+ *
+ * Rows are not appearing, but the site reports success
+ *   You edited the script but did not deploy a New version — see above.
  * ============================================================================
  */
 
@@ -118,25 +146,23 @@ function jsonResponse(obj) {
 }
 
 /**
- * Optional: emails you whenever a row is added, so nobody has to watch the
- * sheet. To enable — Triggers (clock icon) → Add trigger → choose
- * onNewEnquiry_, event source "From spreadsheet", type "On change".
+ * ============================================================================
+ * WANT AN EMAIL ON EVERY NEW ENQUIRY?
+ * ============================================================================
+ * Use the spreadsheet's own notification rules — NOT a script.
+ *
+ *   In the Sheet: Tools → Notification settings → Edit notifications
+ *   → "Any changes are made" → "Email - right away" → Save.
+ *
+ * This deliberately does NOT use the mail service. Apps Script determines the
+ * permissions it needs by scanning the whole file, including functions that
+ * never run, and the mail service requires the *sensitive* send_mail scope. Requesting
+ * a sensitive scope from an unverified script is what triggers Google's
+ * "This app is blocked — this app tried to access sensitive info in your
+ * Google Account" screen during authorisation.
+ *
+ * Keeping this file to SpreadsheetApp only means it asks for one non-sensitive
+ * permission and authorises cleanly. The built-in notification rule gives the
+ * same result with no permissions at all.
+ * ============================================================================
  */
-function onNewEnquiry_() {
-  const sheet = getSheet_();
-  const last = sheet.getLastRow();
-  if (last < 2) return;
-
-  const [, name, email, phone, message] = sheet.getRange(last, 1, 1, 5).getValues()[0];
-
-  MailApp.sendEmail({
-    to: 'onturningpoint@gmail.com',
-    subject: 'New website enquiry — ' + name,
-    body:
-      'Name: ' + name + '\n' +
-      'Email: ' + email + '\n' +
-      'Phone: ' + phone + '\n\n' +
-      message + '\n\n' +
-      '— sent automatically from the OnTurningPoint website',
-  });
-}
