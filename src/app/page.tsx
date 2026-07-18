@@ -6,9 +6,8 @@ import { Hero } from '@/components/Hero';
 import { ServiceIndex } from '@/components/ServiceIndex';
 import { TrustBand } from '@/components/TrustBand';
 import { ProcessSection } from '@/components/ProcessSection';
-import { Testimonials } from '@/components/Testimonials';
+import { Assurances } from '@/components/Assurances';
 import { ImageStatement } from '@/components/ImageStatement';
-import { TESTIMONIALS_READY, testimonialsPlaceholder } from '@/content/testimonials';
 import { company } from '@/content/company';
 // Marquee is now rendered inside TrustBand rather than directly.
 import { FeatureGrid } from '@/components/FeatureGrid';
@@ -146,9 +145,9 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* Testimonials render only once real, permissioned quotes are in place —
-          see src/content/testimonials.ts. */}
-      {TESTIMONIALS_READY && <Testimonials items={testimonialsPlaceholder} />}
+      {/* Occupies the social-proof slot. Swap for <Testimonials /> once real,
+          permissioned student quotes exist — see src/content/testimonials.ts. */}
+      <Assurances />
 
       {/* ---------------------------------------------------------------- */}
       {/* Full-bleed statement                                              */}

@@ -49,15 +49,15 @@ export const testimonialsPlaceholder: Testimonial[] = [
 ];
 
 /**
- * Currently `true` so the section is visible while the design is being
- * reviewed locally.
+ * `false` — the homepage renders <Assurances /> in this slot instead.
  *
- * ⚠️ BEFORE THE SITE GOES PUBLIC: either replace the entries above with real,
- * permissioned quotes, or set this back to `false`. Shipping the bracketed
- * placeholders would look broken; shipping invented quotes in their place
- * would be worse.
+ * To bring testimonials back: fill in real, permissioned quotes above, then in
+ * src/app/page.tsx swap <Assurances /> for
+ *   <Testimonials items={testimonialsPlaceholder} />
+ * (renaming the export once it holds real content). The component and its
+ * markup are finished and ready.
  */
-export const TESTIMONIALS_READY = true;
+export const TESTIMONIALS_READY = false;
 
 export const testimonialsIntro = {
   eyebrow: 'Student stories',
