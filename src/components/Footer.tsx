@@ -101,6 +101,27 @@ export function Footer() {
                   </span>
                 </div>
               </div>
+
+              {/* Branch address. A real <address> element so assistive tech and
+                  search engines both read it as contact information. */}
+              <div className="mt-2 rounded-card bg-surface p-5">
+                <span className="text-eyebrow font-semibold uppercase text-ink-subtle">
+                  Visit the branch
+                </span>
+                <address className="mt-2 not-italic text-[0.8125rem] leading-relaxed text-ink-muted">
+                  {contact.address.line1},<br />
+                  {contact.address.line2},<br />
+                  {contact.address.city}, {contact.address.region} — {contact.address.postalCode}
+                </address>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Punjabi+Family+Dhaba+Ramalingapuram+Nellore"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-block text-[0.8125rem] font-semibold text-heading underline underline-offset-4 transition-colors hover:text-primary"
+                >
+                  Get directions
+                </a>
+              </div>
             </Reveal>
 
             {/* ---- Link columns ---- */}
