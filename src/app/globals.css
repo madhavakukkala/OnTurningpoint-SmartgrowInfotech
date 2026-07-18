@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * ============================================================
+ * OnTurningPoint — design tokens (BRIEF.md §2.1)
+ * CHANGE COLORS HERE. tailwind.config.ts reads these variables,
+ * so editing this block rebrands the entire site.
+ * ============================================================
+ */
+:root {
+  /* Base — the site is WHITE-FORWARD */
+  --bg: #ffffff;
+  --surface: #fafafa;
+
+  /* Single primary: espresso brown */
+  --primary: #2c1917;
+  --primary-soft: #4a332f; /* hover / lifted state only */
+
+  /* Text */
+  --text: #241514;
+  --text-muted: #55504f;
+  --text-subtle: #6b6564;
+
+  /* Quiet section tints — accents ONLY, never the page background */
+  --section-blue: #e7eff6;
+  --section-lavender: #e9e8fa;
+  --section-sand: #f5efe9;
+
+  --border: rgba(40, 40, 40, 0.12);
+  --border-strong: rgba(40, 40, 40, 0.2);
+
+  /* Layout */
+  --gutter: 1.25rem;
+
+  /* Glass surfaces — used by the floating nav and the process cards */
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-shadow: 0 8px 32px rgba(36, 21, 20, 0.1);
+}
+
+@media (min-width: 768px) {
+  :root { --gutter: 2.5rem; }
+}
+@media (min-width: 1280px) {
+  /* BRIEF §2.3 — 80px outer margin at desktop */
+  :root { --gutter: 5rem; }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-size: 1.125rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Visible focus states everywhere (WCAG 2.4.7) */
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Don't show the ring for mouse users who click a focusable element */
+  :focus:not(:focus-visible) { outline: none; }
+
+  ::selection {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  /* Tables inherit the editorial rhythm */
+  th { font-weight: 600; }
+}
+
+@layer components {
+  /* Frosted-glass surface. Falls back to a near-solid tint where
+     backdrop-filter is unsupported, so text stays legible either way. */
+  .glass {
+    background-color: rgba(255, 255, 255, 0.82);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .glass {
+      background-color: var(--glass-bg);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
+    }
+  }
+
+  /* Glass over photography — needs more blur and a darker floor to hold contrast */
+  .glass-on-photo {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 12px 40px rgba(36, 21, 20, 0.16);
+  }
+
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .glass-on-photo {
+      background-color: rgba(255, 255, 255, 0.76);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
+      backdrop-filter: blur(24px) saturate(160%);
+    }
+  }
+
+  /* Horizontal edge fade for scrolling strips (marquee, logo rows). */
+  .edge-fade {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      #000 12%,
+      #000 88%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  }
+
+  /* 12-column grid, 1400px container, responsive 80px outer margin */
+  .container-grid {
+    width: 100%;
+    max-width: 1400px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  /* Editorial italic serif accent used inside display headings */
+  .accent {
+    font-family: var(--font-serif), Georgia, serif;
+    font-style: italic;
+    font-weight: 300;
+    text-transform: none;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* BRIEF §2.5 / WCAG 2.3.3 — respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
