@@ -21,7 +21,8 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = join(root, 'logo', 'logo.svg');
 const OUT = join(root, 'public', 'logo');
 
-const PRIMARY = '#023246'; // must stay in step with --primary (deep navy)
+const PRIMARY = '#002C83'; // must stay in step with --primary (deep blue)
+const ACCENT = '#05DBF7'; // the mark's dot — matches --accent-bright
 const WHITE = '#FFFFFF';
 
 mkdirSync(OUT, { recursive: true });
@@ -48,6 +49,24 @@ function recolor(svg, color) {
     .trim();
 }
 
+/**
+ * Two-tone recolor: the main arrow shape takes `color`, the standalone dot
+ * takes `dot`.
+ *
+ * The source artwork is a <path> (the arrow) plus a <circle> (the dot at the
+ * lower right). Because the Illustrator export drives both from one shared
+ * `.cls-1` class, the class rule is dropped and fills are written directly onto
+ * each element instead — otherwise the stylesheet would override them.
+ */
+function recolorTwoTone(svg, color, dot) {
+  return recolor(svg, color)
+    .replace(/<style>[\s\S]*?<\/style>/g, '')
+    .replace(/<defs>\s*<\/defs>/g, '')
+    .replace(/<path/g, `<path fill="${color}"`)
+    .replace(/<circle/g, `<circle fill="${dot}"`)
+    .replace(/class="[^"]*"/g, '');
+}
+
 /** Extract the inner drawing + viewBox so we can re-wrap the mark in new canvases. */
 function parts(svg) {
   const viewBox = (svg.match(/viewBox="([^"]+)"/) || [, '0 0 130.99 164.6'])[1];
@@ -58,28 +77,31 @@ function parts(svg) {
 const { viewBox, inner } = parts(source);
 const [, , vbW, vbH] = viewBox.split(/\s+/).map(Number);
 
-const markSvg = (color) =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}" role="img" aria-label="OnTurningPoint">${recolor(
+const markSvg = (color, dot = color) =>
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}" role="img" aria-label="OnTurningPoint">${recolorTwoTone(
     inner,
-    color
+    color,
+    dot
   )}</svg>\n`;
 
 /** Full lockup: the mark + the "OnTurningPoint" wordmark set in the brand grotesk. */
-const lockupSvg = (color) => {
+const lockupSvg = (color, dot = color) => {
   const scale = 44 / vbH;
   const w = vbW * scale;
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 56" role="img" aria-label="OnTurningPoint">
-  <g transform="translate(0 6) scale(${scale.toFixed(5)})">${recolor(inner, color)}</g>
+  <g transform="translate(0 6) scale(${scale.toFixed(5)})">${recolorTwoTone(inner, color, dot)}</g>
   <text x="${(w + 14).toFixed(1)}" y="36" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="25" font-weight="700" letter-spacing="-0.9" fill="${color}">OnTurningPoint</text>
 </svg>\n`;
 };
 
 const files = {
   // Primary-on-white — the default everywhere on the light site.
-  'logo.svg': lockupSvg(PRIMARY),
-  'logo-white.svg': lockupSvg(WHITE),
-  'logo-mark.svg': markSvg(PRIMARY),
-  'logo-mark-white.svg': markSvg(WHITE),
+  'logo.svg': lockupSvg(PRIMARY, ACCENT),
+  // On dark grounds the wordmark goes white but the dot keeps the accent,
+  // which is what makes the mark recognisable in both treatments.
+  'logo-white.svg': lockupSvg(WHITE, ACCENT),
+  'logo-mark.svg': markSvg(PRIMARY, ACCENT),
+  'logo-mark-white.svg': markSvg(WHITE, ACCENT),
 };
 
 for (const [name, contents] of Object.entries(files)) {
@@ -94,7 +116,7 @@ const off = { x: (size - vbW) / 2, y: (size - vbH) / 2 };
 const box = size * (1 + pad * 2);
 const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${box.toFixed(2)} ${box.toFixed(2)}">
   <rect width="${box.toFixed(2)}" height="${box.toFixed(2)}" rx="${(box * 0.2).toFixed(2)}" fill="${WHITE}"/>
-  <g transform="translate(${(size * pad + off.x).toFixed(2)} ${(size * pad + off.y).toFixed(2)})">${recolor(inner, PRIMARY)}</g>
+  <g transform="translate(${(size * pad + off.x).toFixed(2)} ${(size * pad + off.y).toFixed(2)})">${recolorTwoTone(inner, PRIMARY, ACCENT)}</g>
 </svg>\n`;
 writeFileSync(join(root, 'src', 'app', 'icon.svg'), favicon, 'utf8');
 console.log('[logo] wrote src/app/icon.svg (favicon)');
@@ -104,7 +126,7 @@ const ogScale = 150 / vbH;
 const og = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="#FFFFFF"/>
   <rect x="0" y="0" width="1200" height="8" fill="${PRIMARY}"/>
-  <g transform="translate(96 150) scale(${ogScale.toFixed(5)})">${recolor(inner, PRIMARY)}</g>
+  <g transform="translate(96 150) scale(${ogScale.toFixed(5)})">${recolorTwoTone(inner, PRIMARY, ACCENT)}</g>
   <text x="96" y="380" font-family="Inter, Arial, sans-serif" font-size="76" font-weight="800" letter-spacing="-2.5" fill="${PRIMARY}">ONTURNINGPOINT</text>
   <text x="96" y="446" font-family="Georgia, serif" font-style="italic" font-size="40" font-weight="300" fill="#555555">Study MBBS &amp; more, abroad.</text>
   <text x="96" y="540" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="500" letter-spacing="3" fill="#555555">OVERSEAS EDUCATION CONSULTANCY · NELLORE, INDIA</text>

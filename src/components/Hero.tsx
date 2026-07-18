@@ -54,7 +54,7 @@ export function Hero() {
     <section
       ref={sectionRef}
       // Cancels the top padding on <main> so the panel sits behind the nav.
-      className="relative isolate -mt-24 flex min-h-[100svh] flex-col overflow-hidden bg-[#021D29] md:-mt-28"
+      className="relative isolate -mt-24 flex min-h-[100svh] flex-col overflow-hidden bg-[#001A3D] md:-mt-28"
     >
       <MagneticCursor containerRef={sectionRef} />
 
@@ -64,7 +64,7 @@ export function Hero() {
         fill
         sizes="100vw"
         priority
-        className="-z-20 object-cover opacity-[0.55]"
+        className="-z-20 object-cover"
       />
       {/*
         Directional scrim rather than an even vignette. The copy occupies the
@@ -76,12 +76,12 @@ export function Hero() {
       */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-gradient-to-r from-[rgba(2,29,41,0.94)] via-[rgba(2,29,41,0.72)] to-[rgba(2,29,41,0.34)]"
+        className="absolute inset-0 -z-10 bg-gradient-to-r from-[rgba(0,18,45,0.82)] via-[rgba(0,18,45,0.42)] to-[rgba(0,18,45,0.12)]"
       />
       {/* Floor for the stat rail, which runs the full width */}
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 -z-10 h-56 bg-gradient-to-t from-[rgba(2,29,41,0.92)] to-transparent"
+        className="absolute inset-x-0 bottom-0 -z-10 h-64 bg-gradient-to-t from-[rgba(0,18,45,0.88)] via-[rgba(0,18,45,0.45)] to-transparent"
       />
 
       {/* ---- Main copy ---- */}
@@ -108,7 +108,7 @@ export function Hero() {
                   variants={line}
                   initial={init}
                   animate={anim}
-                  className={cn('block', l.accent && 'accent text-white/90')}
+                  className={cn('block', l.accent && 'accent accent-on-dark')}
                 >
                   {l.text}
                 </motion.span>
@@ -165,7 +165,10 @@ export function Hero() {
               )}
             >
               <dt className="text-[0.9375rem] font-semibold text-white">{s.label}</dt>
-              <dd className="mt-1 text-[0.9375rem] text-white/55">{s.detail}</dd>
+              {/* white/65 rather than /55: the scrim is much lighter now, so
+                  this keeps margin if the crop ever shifts the rail onto a
+                  brighter part of the frame. */}
+              <dd className="mt-1 text-[0.9375rem] text-white/65">{s.detail}</dd>
             </div>
           ))}
         </motion.dl>

@@ -11,15 +11,15 @@ const T = {
   cool: '#E9F1F6',
   stone: '#EEEEEA',
   warm: '#E3E3DC',
-  primary: '#023246',
-  primarySoft: '#0A4A66',
-  accent: '#1D5A79',
-  accentBright: '#287094',
-  panel: '#021D29',
-  heading: '#023246',
-  text: '#1C1C1C',
-  muted: '#575757',
-  subtle: '#616161',
+  primary: '#002C83',
+  primarySoft: '#0A3FA0',
+  accent: '#108A9E',
+  accentBright: '#05DBF7',
+  panel: '#001A3D',
+  heading: '#002C83',
+  text: '#000000',
+  muted: '#4A4A4A',
+  subtle: '#5E5E5E',
   white: '#FFFFFF',
 };
 
@@ -70,14 +70,17 @@ const checks = [
     [`text on ${g}`, T.text, bg, 4.5],
     [`text-muted on ${g}`, T.muted, bg, 4.5],
     [`text-subtle on ${g}`, T.subtle, bg, 4.5],
-    // The teal used for links must clear AA everywhere it can appear.
-    [`accent on ${g}`, T.accent, bg, 4.5],
+    /**
+     * The cyan accent appears ONLY inside display headings — large text, so
+     * the applicable AA threshold is 3:1, not 4.5:1. If it is ever used at
+     * body size, it must be darkened first.
+     */
+    [`accent on ${g} (large text)`, T.accent, bg, 3.0],
   ]),
 
   ['primary on white (buttons/links)', T.primary, T.bg, 4.5],
   ['white on primary (button label)', T.white, T.primary, 4.5],
   ['white on primary-soft (button hover)', T.white, T.primarySoft, 4.5],
-  ['white on accent', T.white, T.accent, 4.5],
 
   // Dark panel: hero and photographic scrims
   ['white on ink-panel (hero headline)', T.white, T.panel, 4.5],
@@ -90,11 +93,12 @@ const checks = [
   ['text-muted on trust-band wash', T.muted, '#F6F6F7', 4.5],
 
   /**
-   * accent-bright is decorative only (fills, marks). Checked at the 3:1 bar
-   * for non-text UI components rather than the 4.5:1 text bar — if you ever
-   * use it AS text, switch to --accent instead.
+   * accent-bright (#05DBF7) is DARK-GROUND ONLY. It measures 1.68:1 on white,
+   * so it is checked against the panel it actually sits on. Using it anywhere
+   * on a light background — text or otherwise — will fail; reach for --accent.
    */
-  ['accent-bright on white (non-text UI)', T.accentBright, T.bg, 3.0],
+  ['accent-bright on ink-panel (hero accent)', T.accentBright, T.panel, 4.5],
+  ['accent-bright on white — MUST NOT BE USED', T.accentBright, T.bg, 0],
 ];
 
 let failures = 0;

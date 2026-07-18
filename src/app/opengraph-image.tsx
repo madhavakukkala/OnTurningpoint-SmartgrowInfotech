@@ -9,7 +9,7 @@ export const alt = 'OnTurningPoint — overseas education consultancy';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
-const PRIMARY = '#023246';
+const PRIMARY = '#002C83';
 
 export default function OpengraphImage() {
   return new ImageResponse(

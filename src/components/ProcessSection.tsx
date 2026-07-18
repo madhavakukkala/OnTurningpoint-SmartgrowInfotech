@@ -61,7 +61,7 @@ export function ProcessSection({
         >
           {steps.map((step, i) => (
             <RevealItem as="li" key={step.title} className="group">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-media bg-surface">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-media bg-surface">
                 {step.image && (
                   <Image
                     src={step.image}
@@ -72,23 +72,40 @@ export function ProcessSection({
                   />
                 )}
 
+                {/*
+                  Scrim for the copy that now sits inside the frame. Three stops
+                  reaching 90% at the base rather than a flat wash: the imagery
+                  here ranges from a bright office to a dark lab, and a single
+                  even overlay would either wash out the light shots or
+                  under-protect text on the dark ones.
+                */}
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-t from-[rgba(0,10,26,0.9)] via-[rgba(0,10,26,0.42)] to-transparent"
+                />
+
                 {/* Step number chip */}
                 <span
                   aria-hidden="true"
-                  className="absolute left-3.5 top-3.5 flex h-8 w-8 items-center justify-center rounded-md2 bg-black/55 text-[0.8125rem] font-semibold tabular-nums text-white backdrop-blur-sm"
+                  className="absolute left-3.5 top-3.5 flex h-8 w-8 items-center justify-center rounded-md2 bg-black/45 text-[0.8125rem] font-semibold tabular-nums text-white backdrop-blur-sm"
                 >
                   {i + 1}
                 </span>
-              </div>
 
-              <h3 className="mt-5 text-[1.125rem] font-semibold tracking-[-0.5px] text-heading">
-                {/* The visible number is decorative above; screen readers get the
-                    ordinal from the <ol>, so it is not repeated here. */}
-                {step.title}
-              </h3>
-              {step.body && (
-                <p className="mt-2 text-[0.9375rem] leading-relaxed text-ink-muted">{step.body}</p>
-              )}
+                {/* Copy, inside the image */}
+                <div className="absolute inset-x-0 bottom-0 p-6">
+                  <h3 className="text-[1.0625rem] font-semibold tracking-[-0.5px] text-white">
+                    {/* The number chip above is decorative; screen readers take
+                        the ordinal from the <ol>, so it is not repeated here. */}
+                    {step.title}
+                  </h3>
+                  {step.body && (
+                    <p className="mt-1.5 text-[0.875rem] leading-relaxed text-white/75">
+                      {step.body}
+                    </p>
+                  )}
+                </div>
+              </div>
             </RevealItem>
           ))}
         </RevealGroup>

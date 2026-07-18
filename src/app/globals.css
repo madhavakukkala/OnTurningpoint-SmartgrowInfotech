@@ -11,19 +11,20 @@
  */
 :root {
   /**
-   * Palette source (4 colours):
-   *   #023246  deep navy   #287094  teal
-   *   #D4D4CE  stone       #F6F6F6  near-white
-   * White remains the page ground; the four above are applied on top of it.
+   * Palette:
+   *   #002C83  deep blue (headings, logo, buttons)
+   *   #05DBF7  cyan      (the serif accent, the logo dot)
+   *   #F6F6F6  near-white (surfaces)
+   * White is the page ground; body copy is black.
    */
 
   /* Base — the site is WHITE-FORWARD */
   --bg: #ffffff;
   --surface: #f6f6f6;
 
-  /* Single primary: deep navy */
-  --primary: #023246;
-  --primary-soft: #0a4a66; /* hover / lifted state only */
+  /* Single primary: deep blue */
+  --primary: #002c83;
+  --primary-soft: #0a3fa0; /* hover / lifted state only */
 
   /**
    * Teal. Two values on purpose:
@@ -32,8 +33,16 @@
    * The source #287094 measures 4.25:1 on the warm tint, so using it as text
    * would fail AA there. Reach for --accent unless it is purely decorative.
    */
-  --accent: #1d5a79;
-  --accent-bright: #287094;
+  /**
+   * The italic serif accent colour.
+   *
+   * The requested #05DBF7 measures 1.68:1 on white — far below the 3:1 floor
+   * even for large display text, so it is unusable on the light pages. It is
+   * kept as --accent-bright for DARK grounds only (10.79:1 on the hero panel),
+   * with a darkened cyan of the same hue standing in on white.
+   */
+  --accent: #108a9e;
+  --accent-bright: #05dbf7;
 
   /**
    * Headings take the deep navy; body copy stays neutral.
@@ -43,13 +52,13 @@
    * led. Colour now marks structure (headings, links, CTAs) while running text
    * stays neutral and readable.
    */
-  --heading: #023246;
+  --heading: #002c83;
 
-  /* Body text — neutral greys, deliberately outside the palette */
-  --text: #1c1c1c;
-  --text-muted: #575757;
-  /* #616161 is the lightest that still clears AA on the warm tint (4.80:1). */
-  --text-subtle: #616161;
+  /* Body text — black, with greys derived from it for secondary levels */
+  --text: #000000;
+  --text-muted: #4a4a4a;
+  /* #5e5e5e is the lightest that still clears AA on the warm tint (4.51:1). */
+  --text-subtle: #5e5e5e;
 
   /* Quiet section tints — accents ONLY, never the page background */
   --section-cool: #e9f1f6; /* teal, heavily diluted */
@@ -57,10 +66,10 @@
   --section-warm: #e3e3dc; /* stone, closest to source */
 
   /* Dark surfaces (hero panel, photo scrims) */
-  --ink-panel: #021d29;
+  --ink-panel: #001a3d;
 
-  --border: rgba(2, 50, 70, 0.14);
-  --border-strong: rgba(2, 50, 70, 0.24);
+  --border: rgba(0, 44, 131, 0.14);
+  --border-strong: rgba(0, 44, 131, 0.24);
 
   /* Layout */
   --gutter: 1.25rem;
@@ -188,6 +197,12 @@
     font-weight: 300;
     text-transform: none;
     letter-spacing: -0.01em;
+    color: var(--accent);
+  }
+
+  /* Same accent on dark grounds, where the full-strength cyan is legible. */
+  .accent-on-dark {
+    color: var(--accent-bright);
   }
 }
 
