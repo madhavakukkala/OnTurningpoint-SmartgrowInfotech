@@ -3,7 +3,7 @@ import { Heading, Lede } from '@/components/ui/Heading';
 import { Reveal } from '@/components/ui/Reveal';
 import { ContactBlock } from '@/components/ContactBlock';
 import { ContactForm } from '@/components/ContactForm';
-import { contact } from '@/content/company';
+import { company, contact } from '@/content/company';
 import { pageMetadata } from '@/lib/seo';
 
 export const metadata = pageMetadata({
@@ -64,24 +64,43 @@ export default function ContactPage() {
           <p className="mt-4 max-w-prose text-base text-ink-muted">{contact.addressOneLine}</p>
 
           {/*
-            TODO(client): replace this placeholder with the real embed.
-            In Google Maps: search the branch → Share → Embed a map → copy the
-            <iframe> and paste it in place of the block below. Keep the
-            title attribute for screen readers.
+            Google Maps embed for the Nellore branch, centred on the Punjabi
+            Family Dhaba landmark named in the address.
+
+            To update it: Google Maps → search the branch → Share → Embed a map
+            → copy the `src` value out of the supplied <iframe> and replace the
+            URL below. Keep `title`, `loading` and `referrerPolicy` as they are.
+
+            Note: this embed is a third party that sets cookies, which is what
+            the "Third-party cookies" clause in the Cookie Policy covers.
           */}
           <Reveal className="mt-10">
-            <div className="flex aspect-[16/9] items-center justify-center rounded-card bg-section-cool p-8 text-center md:aspect-[21/9]">
-              <div>
-                <p className="text-lg font-semibold text-ink">Map embed placeholder</p>
-                <p className="mx-auto mt-3 max-w-md text-base text-ink-muted">
-                  A Google Maps embed of the Nellore branch goes here. See the note in
-                  <code className="mx-1 rounded bg-white/60 px-1.5 py-0.5 text-sm">
-                    src/app/contact/page.tsx
-                  </code>
-                  for how to add it.
-                </p>
-              </div>
+            <div className="overflow-hidden rounded-card bg-surface">
+              <iframe
+                // A frame with no accessible name is announced as just "frame";
+                // this is what a screen-reader user hears instead.
+                title={`Map showing the ${company.name} branch in Nellore`}
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1325.6302460346672!2d79.98544748607935!3d14.415540310227579!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4cf367216887c1%3A0xef13f79174aa8b90!2sPUNJABI%20FAMILY%20DHABA%202025!5e0!3m2!1sen!2sin!4v1784375212818!5m2!1sen!2sin"
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                // Fluid width with a fixed ratio — the supplied 600x450 would
+                // overflow narrow screens and leave gaps on wide ones.
+                className="block h-[22rem] w-full border-0 md:h-[26rem]"
+              />
             </div>
+          </Reveal>
+
+          {/* Text route out, for anyone who cannot use an embedded map */}
+          <Reveal className="mt-5">
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Punjabi+Family+Dhaba+Ramalingapuram+Nellore"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-base font-semibold text-heading underline underline-offset-4 transition-colors hover:text-primary"
+            >
+              Open in Google Maps
+            </a>
           </Reveal>
         </Container>
       </Section>
