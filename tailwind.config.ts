@@ -50,12 +50,21 @@ const config: Config = {
          * untracked and lets weight carry the emphasis. Slight negative values
          * only, to stop large sizes from looking loose.
          */
-        display: ['clamp(2.5rem, 5vw, 4rem)', { lineHeight: '1.06', letterSpacing: '-0.021em' }],
-        'display-sm': ['clamp(1.75rem, 3.2vw, 2.625rem)', { lineHeight: '1.14', letterSpacing: '-0.018em' }],
-        'display-xs': ['clamp(1.3125rem, 1.9vw, 1.625rem)', { lineHeight: '1.28', letterSpacing: '-0.014em' }],
-        body: ['1.0625rem', { lineHeight: '1.6', letterSpacing: '-0.002em' }],
-        nav: ['0.875rem', { lineHeight: '1.4', letterSpacing: '-0.005em' }],
-        eyebrow: ['0.6875rem', { lineHeight: '1.2', letterSpacing: '0.12em' }],
+        /**
+         * Tracking is a literal -1px on headings, as specified. Fixed px rather
+         * than em is deliberate here: it keeps the requested value exact at
+         * every step instead of scaling with size.
+         *
+         * Body and small text stay near-neutral — -1px on 17px body would close
+         * the counters and cost legibility. The reference pairs tight headings
+         * with normally-spaced body for the same reason.
+         */
+        display: ['clamp(2.5rem, 5vw, 4rem)', { lineHeight: '1.05', letterSpacing: '-1px' }],
+        'display-sm': ['clamp(1.75rem, 3.2vw, 2.625rem)', { lineHeight: '1.13', letterSpacing: '-1px' }],
+        'display-xs': ['clamp(1.3125rem, 1.9vw, 1.625rem)', { lineHeight: '1.28', letterSpacing: '-0.5px' }],
+        body: ['1.0625rem', { lineHeight: '1.6', letterSpacing: '-0.1px' }],
+        nav: ['0.875rem', { lineHeight: '1.4', letterSpacing: '-0.1px' }],
+        eyebrow: ['0.6875rem', { lineHeight: '1.2', letterSpacing: '0.1em' }],
       },
       spacing: {
         // BRIEF §2.3 spacing scale

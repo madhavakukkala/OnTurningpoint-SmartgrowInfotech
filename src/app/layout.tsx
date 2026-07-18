@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Instrument_Serif } from 'next/font/google';
+import { Geist, Instrument_Serif } from 'next/font/google';
 import './globals.css';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
@@ -8,12 +8,21 @@ import { company } from '@/content/company';
 import { SITE_URL, localBusinessSchema, jsonLd } from '@/lib/seo';
 
 /**
- * Typography — BRIEF §2.2.
- * Inter stands in for the Swiss grotesk (General Sans / Satoshi / Neue Haas),
- * paired with Instrument Serif for the light italic editorial accent.
+ * Typography.
+ *
+ * The reference site (superpower.com) sets NB International by Neubau — a
+ * commercially licensed typeface we cannot legally bundle or self-host without
+ * buying a webfont licence from the foundry.
+ *
+ * Geist is the closest openly-licensed match: both are rational neo-grotesques
+ * that favour structure over optical correction, with tight even sidebearings
+ * and near-closed apertures. If the client licenses NB International later,
+ * swapping it in means changing only this declaration.
+ *
+ * Instrument Serif remains for the italic accent word.
  * next/font self-hosts both at build time — no runtime request to Google.
  */
-const grotesk = Inter({
+const grotesk = Geist({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-grotesk',
