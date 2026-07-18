@@ -12,27 +12,15 @@ export const home = {
   },
 
   /**
-   * Below-hero proof grid.
-   *
-   * Deliberately qualitative. Every claim here is traceable to a verified fact
-   * in BRIEF.md (recognition bodies, the destination count, the lowest total
-   * annual cost across the MBBS countries) — no student counts, years-in-
-   * business or partner-university figures, because the client has not
-   * confirmed those numbers. Do not add a count here without a source.
+   * Trust strip metrics.
+   * TODO(client): confirm these four figures before launch — they are currently
+   * placeholders and appear prominently on the homepage.
    */
-  proof: [
-    {
-      title: 'NMC & WHO approved',
-      body: 'Every university we recommend is recognised, and the degree is accepted for FMGE, NEXT, USMLE and PLAB.',
-    },
-    {
-      title: '11 destinations',
-      body: 'MBBS across six countries plus higher education in Europe and the UK — all compared on the same terms.',
-    },
-    {
-      title: 'Fees from ₹3L a year',
-      body: 'Tuition, hostel and food, set out in writing before you commit. No capitation, no donation, no surprises.',
-    },
+  stats: [
+    { value: '10+', label: 'Years guiding students' },
+    { value: '1,000+', label: 'Students counselled' },
+    { value: '50+', label: 'Partner universities' },
+    { value: '11', label: 'Destination countries' },
   ],
 
   whyAbroad: {

@@ -8,7 +8,7 @@ import { Hero } from '@/components/Hero';
 import { ProcessSection } from '@/components/ProcessSection';
 import { FeatureGrid } from '@/components/FeatureGrid';
 import { CountryGrid } from '@/components/CountryCard';
-import { ProofGrid } from '@/components/ProofGrid';
+import { Stats } from '@/components/Stats';
 import { Marquee } from '@/components/Marquee';
 import { CTABand } from '@/components/CTABand';
 import { home } from '@/content/home';
@@ -39,13 +39,22 @@ export default function HomePage() {
     <>
       <Hero />
 
-      {/* Below-hero proof grid — mirrors the reference site's structure */}
-      <ProofGrid items={home.proof} />
-
       {/* Trust signal marquee */}
-      <div className="border-b border-line">
+      <div className="border-y border-line">
         <Marquee items={trustSignals} />
       </div>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* Metrics                                                           */}
+      {/* ---------------------------------------------------------------- */}
+      <Section aria-labelledby="stats-heading" compact>
+        <Container>
+          <h2 id="stats-heading" className="sr-only">
+            OnTurningPoint by the numbers
+          </h2>
+          <Stats items={home.stats} />
+        </Container>
+      </Section>
 
       {/* ---------------------------------------------------------------- */}
       {/* Why MBBS abroad                                                   */}
@@ -132,13 +141,9 @@ export default function HomePage() {
       </Section>
 
       {/* ---------------------------------------------------------------- */}
-      {/* Process — photographic background + glass cards                   */}
+      {/* How it works — numbered image cards                               */}
       {/* ---------------------------------------------------------------- */}
-      <ProcessSection
-        steps={mbbs.steps}
-        image="/images/services.jpg"
-        imageAlt="A counsellor and a student reviewing application documents together"
-      />
+      <ProcessSection steps={mbbs.steps} />
 
       {/* ---------------------------------------------------------------- */}
       {/* Why OnTurningPoint                                                */}

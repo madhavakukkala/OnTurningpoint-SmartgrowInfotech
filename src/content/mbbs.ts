@@ -100,13 +100,48 @@ export const mbbs = {
     { title: 'Advanced learning methods', body: 'Simulation labs, early clinical rotations and research-led teaching.' },
   ],
 
+  /**
+   * The six-step admission process.
+   * `image` is used by the "How it works" card layout on the homepage; the
+   * FeatureGrid rendering on this page ignores it.
+   */
   steps: [
-    { title: 'Initial consultation', body: 'We review your marks, NEET score, budget and long-term goal.' },
-    { title: 'University selection', body: 'A shortlist matched to your profile — with recognition status in writing.' },
-    { title: 'Application submission', body: 'We prepare and submit your application and supporting documents.' },
-    { title: 'Visa processing', body: 'Invitation letter, embassy appointment and document checks.' },
-    { title: 'Pre-departure support', body: 'Travel, forex, insurance and a full briefing before you fly.' },
-    { title: 'Post-arrival assistance', body: 'Airport pickup, accommodation, registration and ongoing support.' },
+    {
+      title: 'Initial consultation',
+      body: 'We review your marks, NEET score, budget and long-term goal.',
+      image: '/images/services.jpg',
+      imageAlt: 'A counsellor and a student talking through options together',
+    },
+    {
+      title: 'University selection',
+      body: 'A shortlist matched to your profile — with recognition status in writing.',
+      image: '/images/mbbs.jpg',
+      imageAlt: 'A medical university laboratory',
+    },
+    {
+      title: 'Application submission',
+      body: 'We prepare and submit your application and supporting documents.',
+      image: '/images/loan.jpg',
+      imageAlt: 'Application paperwork laid out on a desk',
+    },
+    {
+      title: 'Visa processing',
+      body: 'Invitation letter, embassy appointment and document checks.',
+      image: '/images/about-office.jpg',
+      imageAlt: 'A bright office where applications are prepared',
+    },
+    {
+      title: 'Pre-departure support',
+      body: 'Travel, forex, insurance and a full briefing before you fly.',
+      image: '/images/value-added.jpg',
+      imageAlt: 'A packed suitcase ready for departure',
+    },
+    {
+      title: 'Post-arrival assistance',
+      body: 'Airport pickup, accommodation, registration and ongoing support.',
+      image: '/images/internship.jpg',
+      imageAlt: 'Students settling in together after arriving abroad',
+    },
   ],
 
   whyOTP: [

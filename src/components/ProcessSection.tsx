@@ -1,80 +1,94 @@
 import Image from 'next/image';
-import { Container, Eyebrow } from '@/components/ui/Layout';
+import { Container } from '@/components/ui/Layout';
 import { Heading } from '@/components/ui/Heading';
 import { Reveal, RevealGroup, RevealItem } from '@/components/ui/Reveal';
-import { scaleIn } from '@/lib/motion';
 
-export type Step = { title: string; body?: string };
+export type Step = {
+  title: string;
+  body?: string;
+  image?: string;
+  imageAlt?: string;
+};
 
 /**
- * Six-step process over a photographic background with frosted-glass cards.
+ * "How it works" — centred heading and subhead over a row of numbered image
+ * cards, following the reference layout.
  *
- * Legibility over the photo is handled in layers rather than by one flat
- * overlay: the image is desaturated and lightened, a white wash sits on top of
- * it, and each card carries its own blurred surface. That keeps the photograph
- * readable as texture while text stays well clear of AA — the copy is never
- * sitting directly on image pixels.
+ * The step number sits in a translucent chip on the image rather than above the
+ * text, so the sequence is legible while scanning the images alone. Because the
+ * chip sits on an unpredictable photograph, it uses a dark scrim rather than a
+ * tint — white on 55% black holds contrast over any of these images.
+ *
+ * Six steps render 2/3-up rather than the reference's four-across; forcing six
+ * into one row would leave each card too narrow to read at desktop widths.
  */
 export function ProcessSection({
   steps,
-  image,
-  imageAlt,
-  eyebrow = 'How it works',
-  heading = 'From first call to first day',
-  accent = 'in six steps',
+  eyebrow,
+  heading = 'How it works',
+  accent,
+  subhead = 'One team owns your file from the first consultation to your first week on campus.',
   id = 'process-heading',
 }: {
   steps: readonly Step[];
-  image: string;
-  imageAlt: string;
   eyebrow?: string;
   heading?: string;
   accent?: string;
+  subhead?: string;
   id?: string;
 }) {
   return (
-    <section aria-labelledby={id} className="relative isolate overflow-hidden py-16 md:py-24 lg:py-30">
-      {/* Background photograph */}
-      <Image
-        src={image}
-        alt={imageAlt}
-        fill
-        sizes="100vw"
-        className="-z-20 object-cover"
-        // Decorative texture, but it carries meaning for sighted users, so it
-        // keeps a real alt rather than being emptied out.
-      />
-      {/* Wash: lifts the photo toward white so glass cards read cleanly on it */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-white/92 via-white/88 to-white/94 backdrop-saturate-50"
-      />
-
+    <section aria-labelledby={id} className="py-16 md:py-24 lg:py-30">
       <Container>
-        <Reveal className="max-w-3xl">
-          <Eyebrow>{eyebrow}</Eyebrow>
-          <Heading id={id} accent={accent} className="mt-5">
+        {/* Centred header */}
+        <Reveal className="mx-auto max-w-2xl text-center">
+          {eyebrow && (
+            <p className="mb-5 text-eyebrow font-semibold uppercase text-ink-muted">{eyebrow}</p>
+          )}
+          <Heading id={id} accent={accent} balance>
             {heading}
           </Heading>
+          {subhead && (
+            <p className="mx-auto mt-5 max-w-[52ch] text-body text-ink-muted">{subhead}</p>
+          )}
         </Reveal>
 
-        <RevealGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" step={0.06}>
+        {/* Numbered image cards */}
+        <RevealGroup
+          as="ol"
+          className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          step={0.07}
+        >
           {steps.map((step, i) => (
-            <RevealItem key={step.title} variants={scaleIn}>
-              <div className="glass-on-photo h-full rounded-card p-7 transition-transform duration-500 ease-brand motion-safe:hover:-translate-y-1">
+            <RevealItem as="li" key={step.title} className="group">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-media bg-surface">
+                {step.image && (
+                  <Image
+                    src={step.image}
+                    alt={step.imageAlt ?? ''}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-[900ms] ease-brand motion-safe:group-hover:scale-[1.05]"
+                  />
+                )}
+
+                {/* Step number chip */}
                 <span
                   aria-hidden="true"
-                  className="mb-5 block text-[0.75rem] font-semibold tabular-nums tracking-[0.14em] text-primary/50"
+                  className="absolute left-3.5 top-3.5 flex h-8 w-8 items-center justify-center rounded-md2 bg-black/55 text-[0.8125rem] font-semibold tabular-nums text-white backdrop-blur-sm"
                 >
-                  {String(i + 1).padStart(2, '0')}
+                  {i + 1}
                 </span>
-                <h3 className="text-[1.0625rem] font-semibold tracking-[-0.012em] text-ink">
-                  {step.title}
-                </h3>
-                {step.body && (
-                  <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-ink-muted">{step.body}</p>
-                )}
               </div>
+
+              <h3 className="mt-5 text-[1.125rem] font-semibold tracking-[-0.016em] text-ink">
+                {/* The visible number is decorative above; screen readers get the
+                    ordinal from the <ol>, so it is not repeated here. */}
+                {step.title}
+              </h3>
+              {step.body && (
+                <p className="mt-2 text-[0.9375rem] leading-relaxed text-ink-muted">{step.body}</p>
+              )}
             </RevealItem>
           ))}
         </RevealGroup>
