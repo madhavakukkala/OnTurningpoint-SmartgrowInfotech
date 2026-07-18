@@ -82,12 +82,39 @@ All eleven country pages render from **one template** (`src/app/countries/[slug]
 
 The new page, its nav entry, its footer link and its `sitemap.xml` entry all appear automatically.
 
-### Contact form
+### Contact form → Google Sheets
 
-The form validates on the client and POSTs to `src/app/api/contact/route.ts`, which currently
-validates again server-side and logs the enquiry. **To wire it up for real**, replace the
-`console.log` in that file with your email provider or CRM call — keep returning `{ ok: true }` and
-the front end needs no changes.
+Enquiries are written as rows into a Google Sheet via a Google Apps Script web app.
+
+**Setup (once, ~5 minutes):** follow the numbered instructions at the top of
+[`scripts/google-apps-script.gs`](./scripts/google-apps-script.gs). In short — create a Sheet, paste
+that script into Extensions → Apps Script, deploy it as a Web app with access set to *Anyone*, then
+put the deployment URL and your shared secret into `.env.local`:
+
+```bash
+GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/AKfy..../exec
+GOOGLE_SHEETS_SHARED_SECRET=your-long-random-string
+```
+
+The same script has an optional trigger that emails you on every new enquiry, so nobody has to watch
+the spreadsheet.
+
+**Two behaviours worth knowing:**
+
+- **While those variables are unset, the form reports an error to the visitor** instead of pretending
+  to succeed. That is deliberate: an enquiry that silently goes nowhere is worse than one that
+  visibly fails, because the student believes someone is going to call them back. Set the variables
+  before pointing any advertising at the site.
+- The form carries a **honeypot** field (`company`) that is hidden from real users. Submissions with
+  it filled are discarded, and deliberately answered with `200 OK` — telling a spammer they were
+  caught just invites a retry with the field left blank.
+
+**If a submission ever fails**, the full enquiry is written to the server log, so it can be recovered
+from your host's logs rather than lost outright.
+
+**To switch to email or a CRM instead**, replace the `fetch` block in
+`src/app/api/contact/route.ts`. Keep returning `{ ok: true }` on success and the front end needs no
+changes.
 
 ---
 

@@ -31,6 +31,8 @@ export function ContactForm() {
   const [values, setValues] = useState<Fields>(EMPTY);
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>('idle');
+  /** Honeypot. Hidden from real users; bots fill every field they can find. */
+  const [honeypot, setHoneypot] = useState('');
 
   const set = (field: keyof Fields) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setValues((v) => ({ ...v, [field]: e.target.value }));
@@ -56,7 +58,8 @@ export function ContactForm() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values),
+        // `company` is the honeypot — empty for real users, filled by bots.
+        body: JSON.stringify({ ...values, company: honeypot }),
       });
       if (!res.ok) throw new Error('Request failed');
       setStatus('success');
@@ -125,10 +128,36 @@ export function ContactForm() {
         textarea
       />
 
+      {/*
+        Honeypot. Positioned off-screen rather than display:none — bots often
+        skip hidden inputs, but they do fill absolutely-positioned ones. Kept
+        out of the tab order and out of the accessibility tree so no real user
+        can reach it by keyboard or screen reader.
+      */}
+      <div aria-hidden="true" className="pointer-events-none absolute left-[-9999px] h-0 w-0 overflow-hidden">
+        <label htmlFor="company">Company (leave this field empty)</label>
+        <input
+          id="company"
+          name="company"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+        />
+      </div>
+
       {status === 'error' && (
         <p role="alert" className="text-base font-medium text-primary">
-          Something went wrong sending your enquiry. Please try again, or email us directly at
-          onturningpoint@gmail.com.
+          Something went wrong and your enquiry was not sent. Please call us on{' '}
+          <a href="tel:+918500470231" className="underline underline-offset-4">
+            8500470231
+          </a>{' '}
+          or email{' '}
+          <a href="mailto:onturningpoint@gmail.com" className="underline underline-offset-4">
+            onturningpoint@gmail.com
+          </a>{' '}
+          so we do not miss you.
         </p>
       )}
 
