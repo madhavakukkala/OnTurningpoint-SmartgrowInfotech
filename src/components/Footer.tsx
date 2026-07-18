@@ -28,8 +28,8 @@ export function Footer() {
         {/* ---- Top: statement + link columns ---- */}
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-10">
           <Reveal className="lg:col-span-5">
-            <p className="max-w-sm text-[1.75rem] font-medium leading-[1.25] tracking-[-0.02em] text-white">
-              Your turning point <span className="accent text-white/60">starts here.</span>
+            <p className="max-w-sm text-[1.625rem] font-semibold leading-[1.3] tracking-[-0.021em] text-white">
+              Your turning point <span className="accent font-normal text-white/60">starts here.</span>
             </p>
             <Link
               href="/contact"

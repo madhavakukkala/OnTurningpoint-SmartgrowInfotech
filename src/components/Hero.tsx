@@ -78,7 +78,7 @@ export function Hero() {
             </motion.p>
 
             {/* Each line masks upward from its own overflow box */}
-            <h1 className="mt-7 text-display font-semibold text-ink">
+            <h1 className="mt-7 text-display font-bold text-ink">
               <span className="block overflow-hidden py-[0.06em]">
                 <motion.span custom={0} variants={line} initial={init} animate={anim} className="block">
                   {home.hero.headline}
@@ -86,8 +86,7 @@ export function Hero() {
               </span>
               <span className="block overflow-hidden py-[0.06em]">
                 <motion.span custom={1} variants={line} initial={init} animate={anim} className="block">
-                  <span className="accent">{home.hero.headlineAccent}</span>{' '}
-                  <span className="text-ink-subtle">— with a plan.</span>
+                  <span className="accent">{home.hero.headlineAccent}</span>
                 </motion.span>
               </span>
             </h1>

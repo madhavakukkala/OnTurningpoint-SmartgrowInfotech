@@ -8,7 +8,7 @@ import { Hero } from '@/components/Hero';
 import { ProcessSection } from '@/components/ProcessSection';
 import { FeatureGrid } from '@/components/FeatureGrid';
 import { CountryGrid } from '@/components/CountryCard';
-import { Stats } from '@/components/Stats';
+import { ProofGrid } from '@/components/ProofGrid';
 import { Marquee } from '@/components/Marquee';
 import { CTABand } from '@/components/CTABand';
 import { home } from '@/content/home';
@@ -39,22 +39,13 @@ export default function HomePage() {
     <>
       <Hero />
 
+      {/* Below-hero proof grid — mirrors the reference site's structure */}
+      <ProofGrid items={home.proof} />
+
       {/* Trust signal marquee */}
-      <div className="border-y border-line">
+      <div className="border-b border-line">
         <Marquee items={trustSignals} />
       </div>
-
-      {/* ---------------------------------------------------------------- */}
-      {/* Stats                                                             */}
-      {/* ---------------------------------------------------------------- */}
-      <Section aria-labelledby="stats-heading" compact>
-        <Container>
-          <h2 id="stats-heading" className="sr-only">
-            OnTurningPoint by the numbers
-          </h2>
-          <Stats items={home.stats} />
-        </Container>
-      </Section>
 
       {/* ---------------------------------------------------------------- */}
       {/* Why MBBS abroad                                                   */}

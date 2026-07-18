@@ -4,11 +4,18 @@ import { cn } from '@/lib/cn';
 type Level = 'h1' | 'h2' | 'h3' | 'h4';
 type Size = 'display' | 'section' | 'sub';
 
+/**
+ * Sentence-case display headings.
+ *
+ * The uppercase treatment was dropped deliberately: at these sizes all-caps
+ * costs a lot of readability (no ascender/descender silhouette to read by) and
+ * the reference site carries its hierarchy through weight and scale instead.
+ * Weight 700 rather than 800 — 800 reads heavy once the caps are gone.
+ */
 const sizeClass: Record<Size, string> = {
-  // BRIEF §2.2 — uppercase Swiss display, tight tracking, 0.95 line-height
-  display: 'text-display font-extrabold uppercase',
-  section: 'text-display-sm font-extrabold uppercase',
-  sub: 'text-display-xs font-bold',
+  display: 'text-display font-bold',
+  section: 'text-display-sm font-bold',
+  sub: 'text-display-xs font-semibold',
 };
 
 /**

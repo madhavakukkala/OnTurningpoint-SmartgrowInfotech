@@ -44,12 +44,18 @@ const config: Config = {
          * deliberately smaller than a typical "hero" scale; confidence reads
          * as restraint, not as bigger type.
          */
-        display: ['clamp(2.5rem, 5.2vw, 4.25rem)', { lineHeight: '1.02', letterSpacing: '-0.015em' }],
-        'display-sm': ['clamp(1.875rem, 3.4vw, 2.875rem)', { lineHeight: '1.08', letterSpacing: '-0.013em' }],
-        'display-xs': ['clamp(1.375rem, 2vw, 1.75rem)', { lineHeight: '1.2', letterSpacing: '-0.011em' }],
-        body: ['1.0625rem', { lineHeight: '1.65', letterSpacing: '-0.003em' }],
+        /**
+         * Sentence-case display scale.
+         * Tracking is close to normal — the reference sets its headings almost
+         * untracked and lets weight carry the emphasis. Slight negative values
+         * only, to stop large sizes from looking loose.
+         */
+        display: ['clamp(2.5rem, 5vw, 4rem)', { lineHeight: '1.06', letterSpacing: '-0.021em' }],
+        'display-sm': ['clamp(1.75rem, 3.2vw, 2.625rem)', { lineHeight: '1.14', letterSpacing: '-0.018em' }],
+        'display-xs': ['clamp(1.3125rem, 1.9vw, 1.625rem)', { lineHeight: '1.28', letterSpacing: '-0.014em' }],
+        body: ['1.0625rem', { lineHeight: '1.6', letterSpacing: '-0.002em' }],
         nav: ['0.875rem', { lineHeight: '1.4', letterSpacing: '-0.005em' }],
-        eyebrow: ['0.6875rem', { lineHeight: '1.2', letterSpacing: '0.14em' }],
+        eyebrow: ['0.6875rem', { lineHeight: '1.2', letterSpacing: '0.12em' }],
       },
       spacing: {
         // BRIEF §2.3 spacing scale
@@ -67,10 +73,10 @@ const config: Config = {
          * as soft/consumer; premium editorial work keeps the corner subtle so
          * the eye reads the grid, not the rounding.
          */
-        card: '0.875rem', // 14px — cards, panels
-        media: '1.125rem', // 18px — photographic surfaces, slightly softer
-        md2: '0.625rem',
-        lg2: '0.75rem',
+        card: '0.625rem', // 10px — cards, panels
+        media: '0.75rem', // 12px — photographic surfaces
+        md2: '0.5rem',
+        lg2: '0.625rem',
         pill: '999px',
       },
       boxShadow: {
