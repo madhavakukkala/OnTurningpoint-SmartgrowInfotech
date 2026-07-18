@@ -1,8 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import { MessageCircle } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { Button } from '@/components/ui/Button';
+import { whatsappHref } from '@/content/company';
 
 type Fields = { name: string; email: string; phone: string; message: string };
 type Errors = Partial<Record<keyof Fields, string>>;
@@ -33,6 +35,8 @@ export function ContactForm() {
   const [status, setStatus] = useState<Status>('idle');
   /** Honeypot. Hidden from real users; bots fill every field they can find. */
   const [honeypot, setHoneypot] = useState('');
+  /** Built on success, so the WhatsApp message carries the enquiry details. */
+  const [whatsappUrl, setWhatsappUrl] = useState('');
 
   const set = (field: keyof Fields) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setValues((v) => ({ ...v, [field]: e.target.value }));
@@ -62,6 +66,26 @@ export function ContactForm() {
         body: JSON.stringify({ ...values, company: honeypot }),
       });
       if (!res.ok) throw new Error('Request failed');
+
+      // Hand off to WhatsApp with the enquiry already written out, so the
+      // conversation starts with context rather than "hi".
+      const handoff = whatsappHref(
+        `Hi OnTurningPoint, I just submitted an enquiry on your website.\n\n` +
+          `Name: ${values.name}\n` +
+          `Phone: ${values.phone}\n\n` +
+          values.message
+      );
+      setWhatsappUrl(handoff);
+
+      /**
+       * Best-effort auto-open. Browsers only allow window.open inside a user
+       * gesture, and awaiting the fetch has already ended that window, so
+       * Safari and Firefox will usually block this. That is why the success
+       * panel always shows a real link as well — the button is the reliable
+       * path, this is a convenience when it happens to work.
+       */
+      window.open(handoff, '_blank', 'noopener,noreferrer');
+
       setStatus('success');
       setValues(EMPTY);
     } catch {
@@ -71,22 +95,41 @@ export function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div
-        role="status"
-        className="rounded-card bg-section-cool p-10 md:p-12"
-      >
-        <h3 className="text-2xl font-bold tracking-[-0.5px] text-ink">Thank you — we have your enquiry.</h3>
+      <div role="status" className="rounded-card bg-section-cool p-10 md:p-12">
+        <h3 className="text-2xl font-bold tracking-[-0.5px] text-heading">
+          Thank you — we have your enquiry.
+        </h3>
         <p className="mt-4 max-w-prose text-base leading-relaxed text-ink-muted">
-          Our team will get back to you within 24 hours. If it is urgent, call us on any of the
-          numbers listed above.
+          Our team will get back to you within 24 hours. To get an answer sooner, continue the
+          conversation on WhatsApp — your details are already filled in.
         </p>
-        <button
-          type="button"
-          onClick={() => setStatus('idle')}
-          className="mt-8 text-base font-semibold text-ink underline underline-offset-4 hover:text-primary"
-        >
-          Send another enquiry
-        </button>
+
+        <div className="mt-8 flex flex-wrap items-center gap-5">
+          <a
+            href={whatsappUrl || whatsappHref()}
+            target="_blank"
+            rel="noopener noreferrer"
+            /*
+              WhatsApp brand green, with a dark-green label rather than white:
+              white on #25D366 is 1.98:1, the dark label is 6.20:1.
+              The 1px darker border is there because the fill itself is only
+              1.74:1 against this panel, so without it the button's edge is not
+              discernible (WCAG 1.4.11). The border reads 3.77:1.
+            */
+            className="inline-flex items-center gap-2.5 rounded-pill border border-[#178C46] bg-[#25D366] px-6 py-3.5 text-[0.9375rem] font-semibold text-[#0B3D25] transition-transform duration-300 ease-brand motion-safe:hover:-translate-y-0.5"
+          >
+            <MessageCircle aria-hidden="true" size={18} strokeWidth={2} />
+            Continue on WhatsApp
+          </a>
+
+          <button
+            type="button"
+            onClick={() => setStatus('idle')}
+            className="text-base font-semibold text-ink underline underline-offset-4 hover:text-primary"
+          >
+            Send another enquiry
+          </button>
+        </div>
       </div>
     );
   }

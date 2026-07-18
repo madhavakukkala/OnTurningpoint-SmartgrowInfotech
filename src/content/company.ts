@@ -27,6 +27,12 @@ export const contact = {
   addressOneLine:
     'Nellore Branch, near Ramalingapuram, under Railway bridge, behind Punjabi Family Dhaba, SPSR Nellore (Dist), Andhra Pradesh — 524003',
   phones: ['8500470231', '8500471231', '8500450231'],
+  /**
+   * Number used for the WhatsApp handoff after a form submission.
+   * TODO(client): confirm this is the line that actually has WhatsApp on it —
+   * if it is not, students land in a chat nobody reads.
+   */
+  whatsapp: '8500470231',
   email: 'onturningpoint@gmail.com',
   hours: {
     weekdays: 'Monday – Saturday, 10:00 AM – 7:00 PM',
@@ -37,6 +43,16 @@ export const contact = {
 /** Normalises a display phone number into a `tel:` href (India country code). */
 export function telHref(phone: string) {
   return `tel:+91${phone.replace(/\D/g, '')}`;
+}
+
+/**
+ * Builds a wa.me link, optionally with a pre-filled first message.
+ * wa.me needs the country code and no punctuation.
+ */
+export function whatsappHref(message?: string) {
+  const number = `91${contact.whatsapp.replace(/\D/g, '')}`;
+  const query = message ? `?text=${encodeURIComponent(message)}` : '';
+  return `https://wa.me/${number}${query}`;
 }
 
 export const foundation = {

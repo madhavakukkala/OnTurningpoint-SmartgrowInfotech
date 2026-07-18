@@ -75,7 +75,7 @@
  */
 
 /** Must match GOOGLE_SHEETS_SHARED_SECRET in the website's environment. */
-const SHARED_SECRET = 'REPLACE_WITH_A_LONG_RANDOM_STRING';
+const SHARED_SECRET = '381b0a56-b0b2-4b0d-a9c1-6b070b330e3f';
 
 /** Tab within the spreadsheet. Created automatically if missing. */
 const SHEET_NAME = 'Enquiries';
