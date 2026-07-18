@@ -20,7 +20,7 @@ const OUT = join(root, 'public');
 
 const url = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://onturningpoint.com').replace(/\/$/, '');
 
-const PRIMARY = '#2C1917'; // must stay in step with --primary
+const PRIMARY = '#023246'; // must stay in step with --primary
 
 const svg = await QRCode.toString(url, {
   type: 'svg',

@@ -4,16 +4,21 @@
  * AA requires 4.5:1 for body text and 3:1 for large text (>=24px, or >=18.66px bold).
  */
 
+/** Keep in step with the :root block in src/app/globals.css. */
 const T = {
   bg: '#FFFFFF',
-  surface: '#FAFAFA',
-  blue: '#E7EFF6',
-  lavender: '#E9E8FA',
-  sand: '#F5EFE9',
-  primary: '#2C1917',
-  text: '#241514',
-  muted: '#55504F',
-  subtle: '#6B6564',
+  surface: '#F6F6F6',
+  cool: '#E9F1F6',
+  stone: '#EEEEEA',
+  warm: '#E3E3DC',
+  primary: '#023246',
+  primarySoft: '#0A4A66',
+  accent: '#1D5A79',
+  accentBright: '#287094',
+  panel: '#021D29',
+  text: '#023246',
+  muted: '#40606F',
+  subtle: '#4C6874',
   white: '#FFFFFF',
 };
 
@@ -48,28 +53,46 @@ const overWhite = (base, alpha) => {
   );
 };
 
+/** Every light ground a body-text colour is allowed to sit on. */
+const grounds = [
+  ['white', T.bg],
+  ['surface', T.surface],
+  ['cool', T.cool],
+  ['stone', T.stone],
+  ['warm', T.warm],
+];
+
 const checks = [
-  ['text on white', T.text, T.bg, 4.5],
-  ['text on surface', T.text, T.surface, 4.5],
-  ['text-muted on white', T.muted, T.bg, 4.5],
-  ['text-muted on surface', T.muted, T.surface, 4.5],
-  ['text-muted on blue', T.muted, T.blue, 4.5],
-  ['text-muted on lavender', T.muted, T.lavender, 4.5],
-  ['text-muted on sand', T.muted, T.sand, 4.5],
-  ['text-subtle on white', T.subtle, T.bg, 4.5],
-  ['text-subtle on surface', T.subtle, T.surface, 4.5],
-  ['text-subtle on blue', T.subtle, T.blue, 4.5],
+  // Body text across every ground
+  ...grounds.flatMap(([g, bg]) => [
+    [`text on ${g}`, T.text, bg, 4.5],
+    [`text-muted on ${g}`, T.muted, bg, 4.5],
+    [`text-subtle on ${g}`, T.subtle, bg, 4.5],
+    // The teal used for links must clear AA everywhere it can appear.
+    [`accent on ${g}`, T.accent, bg, 4.5],
+  ]),
+
   ['primary on white (buttons/links)', T.primary, T.bg, 4.5],
-  ['primary on blue', T.primary, T.blue, 4.5],
-  ['primary on lavender', T.primary, T.lavender, 4.5],
-  ['primary on sand', T.primary, T.sand, 4.5],
   ['white on primary (button label)', T.white, T.primary, 4.5],
-  ['white/70 on primary (CTA body)', overWhite(T.primary, 0.7), T.primary, 4.5],
-  ['white/80 on primary (footer links)', overWhite(T.primary, 0.8), T.primary, 4.5],
-  ['white/60 on primary (labels)', overWhite(T.primary, 0.6), T.primary, 4.5],
-  ['white/50 on primary (small print)', overWhite(T.primary, 0.5), T.primary, 4.5],
+  ['white on primary-soft (button hover)', T.white, T.primarySoft, 4.5],
+  ['white on accent', T.white, T.accent, 4.5],
+
+  // Dark panel: hero and photographic scrims
+  ['white on ink-panel (hero headline)', T.white, T.panel, 4.5],
+  ['white/70 on ink-panel', overWhite(T.panel, 0.7), T.panel, 4.5],
+  ['white/60 on ink-panel (labels)', overWhite(T.panel, 0.6), T.panel, 4.5],
+  ['white/55 on ink-panel (hero stat detail)', overWhite(T.panel, 0.55), T.panel, 4.5],
+  ['white/50 on ink-panel (small print)', overWhite(T.panel, 0.5), T.panel, 4.5],
+
   ['text-subtle on trust-band wash', T.subtle, '#F6F6F7', 4.5],
   ['text-muted on trust-band wash', T.muted, '#F6F6F7', 4.5],
+
+  /**
+   * accent-bright is decorative only (fills, marks). Checked at the 3:1 bar
+   * for non-text UI components rather than the 4.5:1 text bar — if you ever
+   * use it AS text, switch to --accent instead.
+   */
+  ['accent-bright on white (non-text UI)', T.accentBright, T.bg, 3.0],
 ];
 
 let failures = 0;

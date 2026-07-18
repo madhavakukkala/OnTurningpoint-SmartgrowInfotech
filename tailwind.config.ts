@@ -20,15 +20,22 @@ const config: Config = {
           DEFAULT: 'var(--primary)',
           soft: 'var(--primary-soft)',
         },
+        accent: {
+          DEFAULT: 'var(--accent)',
+          bright: 'var(--accent-bright)',
+        },
         ink: {
           DEFAULT: 'var(--text)',
           muted: 'var(--text-muted)',
           subtle: 'var(--text-subtle)',
+          panel: 'var(--ink-panel)',
         },
+        /* Renamed from blue/lavender/sand — the old names no longer described
+           the colours and would have misled the next person editing them. */
         section: {
-          blue: 'var(--section-blue)',
-          lavender: 'var(--section-lavender)',
-          sand: 'var(--section-sand)',
+          cool: 'var(--section-cool)',
+          stone: 'var(--section-stone)',
+          warm: 'var(--section-warm)',
         },
         line: 'var(--border)',
       },

@@ -54,7 +54,7 @@ export function Hero() {
     <section
       ref={sectionRef}
       // Cancels the top padding on <main> so the panel sits behind the nav.
-      className="relative isolate -mt-24 flex min-h-[100svh] flex-col overflow-hidden bg-[#0B0708] md:-mt-28"
+      className="relative isolate -mt-24 flex min-h-[100svh] flex-col overflow-hidden bg-[#021D29] md:-mt-28"
     >
       <MagneticCursor containerRef={sectionRef} />
 
@@ -76,12 +76,12 @@ export function Hero() {
       */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-gradient-to-r from-[rgba(11,7,8,0.94)] via-[rgba(11,7,8,0.72)] to-[rgba(11,7,8,0.34)]"
+        className="absolute inset-0 -z-10 bg-gradient-to-r from-[rgba(2,29,41,0.94)] via-[rgba(2,29,41,0.72)] to-[rgba(2,29,41,0.34)]"
       />
       {/* Floor for the stat rail, which runs the full width */}
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 -z-10 h-56 bg-gradient-to-t from-[rgba(11,7,8,0.92)] to-transparent"
+        className="absolute inset-x-0 bottom-0 -z-10 h-56 bg-gradient-to-t from-[rgba(2,29,41,0.92)] to-transparent"
       />
 
       {/* ---- Main copy ---- */}

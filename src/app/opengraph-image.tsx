@@ -9,7 +9,7 @@ export const alt = 'OnTurningPoint — overseas education consultancy';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
-const PRIMARY = '#2C1917';
+const PRIMARY = '#023246';
 
 export default function OpengraphImage() {
   return new ImageResponse(
@@ -46,12 +46,12 @@ export default function OpengraphImage() {
           >
             STUDY MBBS ABROAD
           </div>
-          <div style={{ fontSize: 34, color: '#55504F', marginTop: 22 }}>
+          <div style={{ fontSize: 34, color: '#40606F', marginTop: 22 }}>
             Expert, transparent, end-to-end guidance.
           </div>
         </div>
 
-        <div style={{ fontSize: 22, letterSpacing: 3, color: '#6B6564' }}>
+        <div style={{ fontSize: 22, letterSpacing: 3, color: '#4C6874' }}>
           ONTURNINGPOINT · OVERSEAS EDUCATION CONSULTANCY · NELLORE, INDIA
         </div>
       </div>

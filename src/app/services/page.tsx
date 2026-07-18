@@ -51,7 +51,7 @@ export default function ServicesPage() {
         </Container>
       </Section>
 
-      <Section tone="lavender" aria-labelledby="why-otp-heading">
+      <Section tone="stone" aria-labelledby="why-otp-heading">
         <Container>
           <SectionHeader
             id="why-otp-heading"

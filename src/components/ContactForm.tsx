@@ -70,7 +70,7 @@ export function ContactForm() {
     return (
       <div
         role="status"
-        className="rounded-card bg-section-blue p-10 md:p-12"
+        className="rounded-card bg-section-cool p-10 md:p-12"
       >
         <h3 className="text-2xl font-bold tracking-[-0.5px] text-ink">Thank you — we have your enquiry.</h3>
         <p className="mt-4 max-w-prose text-base leading-relaxed text-ink-muted">

@@ -50,12 +50,12 @@ export function ImageStatement({
         {/* Directional scrim — heavy where the text sits, clearing to the right */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-gradient-to-r from-[rgba(18,10,9,0.88)] via-[rgba(18,10,9,0.55)] to-[rgba(18,10,9,0.15)]"
+          className="absolute inset-0 -z-10 bg-gradient-to-r from-[rgba(2,24,34,0.88)] via-[rgba(2,24,34,0.55)] to-[rgba(2,24,34,0.15)]"
         />
         {/* Vertical softener for the stacked mobile layout */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-gradient-to-t from-[rgba(18,10,9,0.5)] to-transparent md:hidden"
+          className="absolute inset-0 -z-10 bg-gradient-to-t from-[rgba(2,24,34,0.5)] to-transparent md:hidden"
         />
 
         <Container className="relative flex min-h-[32rem] items-center py-20 md:min-h-[38rem] lg:min-h-[42rem]">

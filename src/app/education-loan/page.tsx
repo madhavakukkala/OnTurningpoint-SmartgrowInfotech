@@ -52,7 +52,7 @@ export default function EducationLoanPage() {
         </Container>
       </Section>
 
-      <Section tone="sand" aria-labelledby="loan-eligibility-heading">
+      <Section tone="warm" aria-labelledby="loan-eligibility-heading">
         <Container>
           <SectionHeader
             id="loan-eligibility-heading"

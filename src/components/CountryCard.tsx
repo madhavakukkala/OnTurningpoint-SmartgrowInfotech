@@ -31,7 +31,7 @@ export function CountryCard({ country }: { country: Country }) {
         {/* Scrim */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-t from-[rgba(20,11,10,0.88)] via-[rgba(20,11,10,0.35)] to-transparent"
+          className="absolute inset-0 bg-gradient-to-t from-[rgba(2,24,34,0.88)] via-[rgba(2,24,34,0.35)] to-transparent"
         />
 
         {/* Copy */}

@@ -58,7 +58,7 @@ export default function PlacementsPage() {
         labelled as illustrative — these are example outcomes by market, not
         named individuals.
       */}
-      <Section tone="lavender" aria-labelledby="placements-outcomes-heading">
+      <Section tone="stone" aria-labelledby="placements-outcomes-heading">
         <Container>
           <SectionHeader
             id="placements-outcomes-heading"

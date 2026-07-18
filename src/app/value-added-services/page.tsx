@@ -60,7 +60,7 @@ export default function ValueAddedServicesPage() {
         </Container>
       </Section>
 
-      <Section tone="lavender" aria-labelledby="vas-why-otp-heading">
+      <Section tone="stone" aria-labelledby="vas-why-otp-heading">
         <Container>
           <SectionHeader
             id="vas-why-otp-heading"

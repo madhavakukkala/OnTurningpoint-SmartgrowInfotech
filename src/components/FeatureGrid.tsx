@@ -9,7 +9,7 @@ export type Feature = { title: string; body?: string; href?: string };
  * Cards cycle through the quiet accent tints so a long grid stays calm but
  * not monotonous (BRIEF §2.1 — accents only, never the page background).
  */
-const tones = ['surface', 'blue', 'sand', 'lavender'] as const;
+const tones = ['surface', 'cool', 'warm', 'stone'] as const;
 
 export function FeatureGrid({
   items,

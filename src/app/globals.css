@@ -10,26 +10,46 @@
  * ============================================================
  */
 :root {
+  /**
+   * Palette source (4 colours):
+   *   #023246  deep navy   #287094  teal
+   *   #D4D4CE  stone       #F6F6F6  near-white
+   * White remains the page ground; the four above are applied on top of it.
+   */
+
   /* Base — the site is WHITE-FORWARD */
   --bg: #ffffff;
-  --surface: #fafafa;
+  --surface: #f6f6f6;
 
-  /* Single primary: espresso brown */
-  --primary: #2c1917;
-  --primary-soft: #4a332f; /* hover / lifted state only */
+  /* Single primary: deep navy */
+  --primary: #023246;
+  --primary-soft: #0a4a66; /* hover / lifted state only */
 
-  /* Text */
-  --text: #241514;
-  --text-muted: #55504f;
-  --text-subtle: #6b6564;
+  /**
+   * Teal. Two values on purpose:
+   *   --accent        safe for TEXT and links on every ground we use (>=4.5:1)
+   *   --accent-bright the source teal, for fills, marks and decoration only
+   * The source #287094 measures 4.25:1 on the warm tint, so using it as text
+   * would fail AA there. Reach for --accent unless it is purely decorative.
+   */
+  --accent: #1d5a79;
+  --accent-bright: #287094;
+
+  /* Text — navy rather than neutral grey, so body copy belongs to the palette */
+  --text: #023246;
+  --text-muted: #40606f;
+  --text-subtle: #4c6874;
 
   /* Quiet section tints — accents ONLY, never the page background */
-  --section-blue: #e7eff6;
-  --section-lavender: #e9e8fa;
-  --section-sand: #f5efe9;
+  --section-cool: #e9f1f6; /* teal, heavily diluted */
+  --section-stone: #eeeeea; /* stone, lightened */
+  --section-warm: #e3e3dc; /* stone, closest to source */
 
-  --border: rgba(40, 40, 40, 0.12);
-  --border-strong: rgba(40, 40, 40, 0.2);
+  /* Dark surfaces (hero panel, photo scrims) */
+  --ink-panel: #021d29;
+
+  --border: rgba(2, 50, 70, 0.14);
+  --border-strong: rgba(2, 50, 70, 0.24);
 
   /* Layout */
   --gutter: 1.25rem;

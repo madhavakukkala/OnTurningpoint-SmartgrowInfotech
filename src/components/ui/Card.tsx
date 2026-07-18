@@ -2,14 +2,14 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { cn } from '@/lib/cn';
 
-type CardTone = 'plain' | 'surface' | 'blue' | 'lavender' | 'sand' | 'outline';
+type CardTone = 'plain' | 'surface' | 'cool' | 'stone' | 'warm' | 'outline';
 
 const toneClass: Record<CardTone, string> = {
   plain: 'bg-white shadow-card',
   surface: 'bg-surface',
-  blue: 'bg-section-blue',
-  lavender: 'bg-section-lavender',
-  sand: 'bg-section-sand',
+  cool: 'bg-section-cool',
+  stone: 'bg-section-stone',
+  warm: 'bg-section-warm',
   /* Formerly a hairline outline — cards now separate by fill alone. */
   outline: 'bg-surface',
 };

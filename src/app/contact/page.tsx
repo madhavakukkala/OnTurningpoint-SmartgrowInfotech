@@ -70,7 +70,7 @@ export default function ContactPage() {
             title attribute for screen readers.
           */}
           <Reveal className="mt-10">
-            <div className="flex aspect-[16/9] items-center justify-center rounded-card bg-section-blue p-8 text-center md:aspect-[21/9]">
+            <div className="flex aspect-[16/9] items-center justify-center rounded-card bg-section-cool p-8 text-center md:aspect-[21/9]">
               <div>
                 <p className="text-lg font-semibold text-ink">Map embed placeholder</p>
                 <p className="mx-auto mt-3 max-w-md text-base text-ink-muted">

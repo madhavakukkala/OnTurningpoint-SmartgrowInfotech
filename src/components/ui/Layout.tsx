@@ -14,14 +14,14 @@ export function Container({
   return <Tag className={cn('container-grid', className)}>{children}</Tag>;
 }
 
-type Tone = 'default' | 'surface' | 'blue' | 'lavender' | 'sand' | 'dark';
+type Tone = 'default' | 'surface' | 'cool' | 'stone' | 'warm' | 'dark';
 
 const toneClass: Record<Tone, string> = {
   default: 'bg-bg',
   surface: 'bg-surface',
-  blue: 'bg-section-blue',
-  lavender: 'bg-section-lavender',
-  sand: 'bg-section-sand',
+  cool: 'bg-section-cool',
+  stone: 'bg-section-stone',
+  warm: 'bg-section-warm',
   dark: 'bg-primary text-white',
 };
 

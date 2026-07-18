@@ -102,7 +102,7 @@ export default function AboutPage() {
       </Section>
 
       {/* Values */}
-      <Section tone="sand" aria-labelledby="values-heading">
+      <Section tone="warm" aria-labelledby="values-heading">
         <Container>
           <SectionHeader
             id="values-heading"

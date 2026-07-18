@@ -52,7 +52,7 @@ export default function InternshipPage() {
         </Container>
       </Section>
 
-      <Section tone="blue" aria-labelledby="internship-features-heading">
+      <Section tone="cool" aria-labelledby="internship-features-heading">
         <Container>
           <SectionHeader
             id="internship-features-heading"

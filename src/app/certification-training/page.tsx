@@ -51,7 +51,7 @@ export default function CertificationTrainingPage() {
         </Container>
       </Section>
 
-      <Section tone="blue" aria-labelledby="cert-features-heading">
+      <Section tone="cool" aria-labelledby="cert-features-heading">
         <Container>
           <SectionHeader
             id="cert-features-heading"

@@ -89,7 +89,7 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
 
       {/* ---- MBBS variant: fees + eligibility ---- */}
       {country.kind === 'mbbs' && (
-        <Section tone="blue" aria-labelledby="fees-heading">
+        <Section tone="cool" aria-labelledby="fees-heading">
           <Container>
             <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
               <div className="lg:col-span-5">
@@ -132,7 +132,7 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
       {/* ---- Study-abroad variant: courses, costs, admission, visa, scholarships ---- */}
       {country.kind === 'study' && (
         <>
-          <Section tone="blue" aria-labelledby="courses-heading">
+          <Section tone="cool" aria-labelledby="courses-heading">
             <Container>
               <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
                 <div className="lg:col-span-5">
@@ -193,7 +193,7 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
             </Container>
           </Section>
 
-          <Section tone="lavender" aria-labelledby="after-heading">
+          <Section tone="stone" aria-labelledby="after-heading">
             <Container>
               <div className="grid gap-14 lg:grid-cols-2 lg:gap-16">
                 <div>

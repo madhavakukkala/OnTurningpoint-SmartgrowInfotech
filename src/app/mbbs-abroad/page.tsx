@@ -102,7 +102,7 @@ export default function MbbsAbroadPage() {
       </Section>
 
       {/* Benefits */}
-      <Section tone="blue" aria-labelledby="benefits-heading">
+      <Section tone="cool" aria-labelledby="benefits-heading">
         <Container>
           <SectionHeader
             id="benefits-heading"

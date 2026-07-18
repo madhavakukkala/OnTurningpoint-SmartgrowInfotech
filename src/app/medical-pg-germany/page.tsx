@@ -52,7 +52,7 @@ export default function MedicalPGGermanyPage() {
         </Container>
       </Section>
 
-      <Section tone="blue" aria-labelledby="process-heading">
+      <Section tone="cool" aria-labelledby="process-heading">
         <Container>
           <SectionHeader
             id="process-heading"

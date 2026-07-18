@@ -7,8 +7,8 @@
  * Run:  npm run logo
  *
  * The source artwork is white (fill:#fff) so it is invisible on the white site
- * background. This script recolors it to the primary espresso brown for light
- * backgrounds, and keeps a white variant for dark sections (the footer).
+ * background. This script recolors it to the primary deep navy for light
+ * backgrounds, and keeps a white variant for dark sections (the hero, scrims).
  *
  * TODO(client): if a NEW raw logo is supplied, drop it at /logo/logo.svg and
  * re-run `npm run logo`. Nothing else needs to change.
@@ -21,7 +21,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = join(root, 'logo', 'logo.svg');
 const OUT = join(root, 'public', 'logo');
 
-const PRIMARY = '#2C1917'; // BRIEF §2.1 --primary (espresso brown)
+const PRIMARY = '#023246'; // must stay in step with --primary (deep navy)
 const WHITE = '#FFFFFF';
 
 mkdirSync(OUT, { recursive: true });
