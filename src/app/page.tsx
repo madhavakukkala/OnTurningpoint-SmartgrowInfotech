@@ -1,10 +1,9 @@
-import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
 import { Container, Section, Eyebrow } from '@/components/ui/Layout';
 import { Heading, Lede } from '@/components/ui/Heading';
 import { Button } from '@/components/ui/Button';
-import { Reveal, RevealGroup, RevealItem } from '@/components/ui/Reveal';
+import { Reveal } from '@/components/ui/Reveal';
 import { Hero } from '@/components/Hero';
+import { ServiceIndex } from '@/components/ServiceIndex';
 import { ProcessSection } from '@/components/ProcessSection';
 import { FeatureGrid } from '@/components/FeatureGrid';
 import { CountryGrid } from '@/components/CountryCard';
@@ -116,27 +115,9 @@ export default function HomePage() {
             </Heading>
           </Reveal>
 
-          <RevealGroup as="ul" className="mt-16 border-t border-line">
-            {home.services.items.map((item) => (
-              <RevealItem as="li" key={item.href}>
-                <Link
-                  href={item.href}
-                  className="group flex flex-col gap-2 border-b border-line py-8 transition-colors hover:bg-surface md:flex-row md:items-center md:gap-10 md:px-4"
-                >
-                  <h3 className="text-2xl font-bold tracking-[-1px] text-ink md:w-[38%] md:shrink-0">
-                    {item.title}
-                  </h3>
-                  <p className="flex-1 text-base text-ink-muted">{item.body}</p>
-                  <ArrowUpRight
-                    aria-hidden="true"
-                    size={22}
-                    strokeWidth={1.5}
-                    className="hidden shrink-0 text-ink-subtle transition-transform duration-300 ease-brand group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary md:block"
-                  />
-                </Link>
-              </RevealItem>
-            ))}
-          </RevealGroup>
+          <Reveal className="mt-14">
+            <ServiceIndex items={home.services.items} />
+          </Reveal>
         </Container>
       </Section>
 
