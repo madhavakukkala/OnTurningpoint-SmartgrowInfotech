@@ -6,6 +6,10 @@ import { Hero } from '@/components/Hero';
 import { ServiceIndex } from '@/components/ServiceIndex';
 import { TrustBand } from '@/components/TrustBand';
 import { ProcessSection } from '@/components/ProcessSection';
+import { Testimonials } from '@/components/Testimonials';
+import { ImageStatement } from '@/components/ImageStatement';
+import { TESTIMONIALS_READY, testimonialsPlaceholder } from '@/content/testimonials';
+import { company } from '@/content/company';
 // Marquee is now rendered inside TrustBand rather than directly.
 import { FeatureGrid } from '@/components/FeatureGrid';
 import { CountryGrid } from '@/components/CountryCard';
@@ -139,6 +143,24 @@ export default function HomePage() {
           <FeatureGrid items={home.whyUs.items} columns={3} className="mt-16" />
         </Container>
       </Section>
+
+      {/* Testimonials render only once real, permissioned quotes are in place —
+          see src/content/testimonials.ts. */}
+      {TESTIMONIALS_READY && <Testimonials items={testimonialsPlaceholder} />}
+
+      {/* ---------------------------------------------------------------- */}
+      {/* Full-bleed statement                                              */}
+      {/* ---------------------------------------------------------------- */}
+      <ImageStatement
+        image="/images/hero.jpg"
+        imageAlt="Graduates celebrating at the end of their degree"
+        eyebrow="Admissions open · 2025–2026"
+        headline="Your turning point"
+        headlineAccent="starts here"
+        body="Tell us your marks, your budget and where you want to practise. The first consultation is free, and there is no obligation."
+        primaryCta={{ label: company.primaryCta, href: '/contact' }}
+        secondaryCta={{ label: 'Explore destinations', href: '/countries' }}
+      />
 
       <CTABand
         heading={home.cta.heading}
