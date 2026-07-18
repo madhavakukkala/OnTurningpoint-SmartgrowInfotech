@@ -43,9 +43,9 @@ const config: Config = {
          * of scaling with size. Uppercase labels are the one exception and keep
          * positive tracking — see globals.css.
          */
-        display: ['clamp(2.5rem, 5vw, 4rem)', { lineHeight: '1.05', letterSpacing: '-0.5px' }],
-        'display-sm': ['clamp(1.75rem, 3.2vw, 2.625rem)', { lineHeight: '1.13', letterSpacing: '-0.5px' }],
-        'display-xs': ['clamp(1.3125rem, 1.9vw, 1.625rem)', { lineHeight: '1.28', letterSpacing: '-0.5px' }],
+        display: ['clamp(2rem, 3.6vw, 3rem)', { lineHeight: '1.1', letterSpacing: '-0.5px' }],
+        'display-sm': ['clamp(1.5rem, 2.4vw, 2rem)', { lineHeight: '1.2', letterSpacing: '-0.5px' }],
+        'display-xs': ['clamp(1.1875rem, 1.5vw, 1.375rem)', { lineHeight: '1.35', letterSpacing: '-0.5px' }],
         body: ['1.0625rem', { lineHeight: '1.6', letterSpacing: '-0.5px' }],
         nav: ['0.875rem', { lineHeight: '1.4', letterSpacing: '-0.5px' }],
         eyebrow: ['0.6875rem', { lineHeight: '1.2', letterSpacing: '0.1em' }],

@@ -64,12 +64,24 @@ export function Hero() {
         fill
         sizes="100vw"
         priority
-        className="-z-20 object-cover opacity-[0.14]"
+        className="-z-20 object-cover opacity-[0.55]"
       />
-      {/* Vignette — keeps the lower rail and the left column sitting on true black */}
+      {/*
+        Directional scrim rather than an even vignette. The copy occupies the
+        left column, so the darkness is concentrated there and clears across to
+        the right — that lets the photograph read properly on the open side
+        while the type still sits on a near-black ground. An even overlay would
+        have to be dark enough for the text everywhere, which is what made the
+        previous version look flat.
+      */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-[radial-gradient(120%_90%_at_75%_35%,rgba(11,7,8,0.55)_0%,rgba(11,7,8,0.9)_60%,#0B0708_100%)]"
+        className="absolute inset-0 -z-10 bg-gradient-to-r from-[rgba(11,7,8,0.94)] via-[rgba(11,7,8,0.72)] to-[rgba(11,7,8,0.34)]"
+      />
+      {/* Floor for the stat rail, which runs the full width */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 bottom-0 -z-10 h-56 bg-gradient-to-t from-[rgba(11,7,8,0.92)] to-transparent"
       />
 
       {/* ---- Main copy ---- */}
