@@ -156,10 +156,11 @@ export default function HomePage() {
       {/* Full-bleed statement                                              */}
       {/* ---------------------------------------------------------------- */}
       <ImageStatement
-        /* Not hero.jpg — the hero now uses it, and repeating the same
-           photograph twice on one page reads as an asset shortage. */
-        image="/images/value-added.jpg"
-        imageAlt="A packed suitcase ready for departure"
+        /* Dedicated to this slot. The previous packed-suitcase shot read as a
+           holiday rather than an education, and hero.jpg is taken by the hero.
+           Chosen so the left third stays dark and uncluttered under the copy. */
+        image="/images/statement.jpg"
+        imageAlt="Students walking across a tree-lined university quad at golden hour, with autumn foliage in front of historic college buildings"
         eyebrow="Admissions open · 2025–2026"
         headline="Your turning point"
         headlineAccent="starts here"
